@@ -5,3 +5,4 @@ ADR_STUDENTS_2017_2018_DATA_TABLE.csv
 *.pyc
 DjangoWeb/DjangoWeb/__pycache__/settings.cpython-37.pyc
 DjangoWeb/DjangoWeb/__pycache__/urls.cpython-37.pyc
+DjangoWeb/DjangoWeb/__pycache__/urls.cpython-37.pyc
