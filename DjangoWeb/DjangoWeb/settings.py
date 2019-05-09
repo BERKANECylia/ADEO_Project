@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Components
     'PRG_STUDENT_SITE',
+    'UploadingFile',
 ]
 
 # Middleware framework
@@ -115,3 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+# Store CSV file 
+MEDIA_ROOT=os.path.join(BASE_DIR, 'CSVFile')
+MEDIA_URL='/CSV/'
