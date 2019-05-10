@@ -1,4 +1,5 @@
 from django.db import models
+from django_pandas.managers import DataFrameManager
 
 class ProgramTable(models.Model):
     ID_ANO       =models.IntegerField()
@@ -6,6 +7,8 @@ class ProgramTable(models.Model):
     ANNE_SCOLAIRE=models.CharField(max_length=120)
     SITE         =models.CharField(max_length=120)
 
+    pdobjects = DataFrameManager() 
+    
     class Meta:
         db_table = 'PRG_STUDENT_SITE'
 
@@ -27,6 +30,9 @@ class mergedTables(models.Model):
     REMUNERATION =models.CharField(max_length=120)
     # REMUNERATION =models.DecimalField()
     # idCSV =models.IntegerField()
+
+    objects = models.Manager()
+    pdobjects = DataFrameManager() 
 
     class Meta:
         db_table = 'mergedtables'

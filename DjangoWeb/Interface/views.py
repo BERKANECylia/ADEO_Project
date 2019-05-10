@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ProgramTable, mergedTables
+from .scriptETL import showMissingValues
 
 # Create your views here.
 def home(request):
@@ -20,6 +21,13 @@ def descriptiveStats(request):
     # .count()
     context={'query_results':query_results}
     return render(request, 'descriptiveStats2.html', context)
+
+def etl(request):
+    qs = ProgramTable.pdobjects.all()
+    df = qs.to_dataframe()
+    df_new=showMissingValues(df)
+    context=df_new.to_dict('split')
+    return render(request, 'etl.html', context)
 
 def maps(request):
     return render(request, 'maps.html')

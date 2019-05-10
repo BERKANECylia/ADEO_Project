@@ -10,10 +10,10 @@
     <title>Intership Stats</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-
+    
     <!-- Bootstrap core CSS -->
-<link href="{% static 'css/bootstrap.min.css' %} " rel="stylesheet" type="text/css">
-
+    <link href="{% static 'css/bootstrap.min.css' %} " rel="stylesheet" type="text/css">
+    <!-- <link rel="stylesheet" href="{% static 'bootstrap-table.css"> -->
 
     <style>
       .bd-placeholder-img {
@@ -101,7 +101,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/Interface/etl">
               <span data-feather="layers"></span>
               ETL
             </a>
@@ -131,6 +131,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="{% static 'dashboard.js'%} "></script>
+        <!-- <script src="{% static 'pandas_bootstrap_table.js'%}""></script> -->
         <!-- <script src="{% static 'feather.min.js'%} "></script> -->
       </body>
 </html>
