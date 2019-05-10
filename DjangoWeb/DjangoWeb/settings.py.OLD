@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #Components
-    'PRG_STUDENT_SITE',
+    'dataCRUD',
     'UploadingFile',
 ]
 
