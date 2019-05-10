@@ -6,8 +6,8 @@ class ProgramTable(models.Model):
     ANNE_SCOLAIRE=models.CharField(max_length=120)
     SITE         =models.CharField(max_length=120)
 
-    class Meta:
-        db_table = 'PRG_STUDENT_SITE'
+#    class Meta:
+#        db_table = 'PRG_STUDENT_SITE'
 
 class mergedTables(models.Model):
     # id      =models.IntegerField()

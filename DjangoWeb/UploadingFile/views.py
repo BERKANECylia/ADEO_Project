@@ -12,7 +12,7 @@ import logging
 from django.db import models
 from django.db import connection 
 #from .models import PRG_STUDENT_SITE
-from PRG_STUDENT_SITE.models import PRG_STUDENT_SITE 
+from dataCRUD.models import PRG_STUDENT_SITE 
 
 
 def uploadCSV(request):
