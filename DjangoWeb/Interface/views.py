@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ProgramTable, mergedTables
+from dataCRUD.models import PRG_STUDENT_SITE, mergedTables
 from .scriptETL import showMissingValues
 
 # Create your views here.
@@ -23,7 +23,7 @@ def descriptiveStats(request):
     return render(request, 'descriptiveStats2.html', context)
 
 def etl(request):
-    qs = ProgramTable.pdobjects.all()
+    qs = PRG_STUDENT_SITE.pdobjects.all()
     df = qs.to_dataframe()
     df_new=showMissingValues(df)
     context=df_new.to_dict('split')
