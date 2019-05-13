@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from dataCRUD.models import PRG_STUDENT_SITE, mergedTables
+from dataCRUD.models import *
 from .scriptETL import showMissingValues
 
 # Create your views here.
@@ -26,7 +26,20 @@ def etl(request):
     qs = PRG_STUDENT_SITE.pdobjects.all()
     df = qs.to_dataframe()
     df_new=showMissingValues(df)
-    context=df_new.to_dict('split')
+
+    qs1 = ADR_STUDENTS.pdobjects.all()
+    df1 = qs1.to_dataframe()
+    df1_new=showMissingValues(df1)
+
+    qs2 = STUDENT_INTERNSHIP.pdobjects.all()
+    df2 = qs2.to_dataframe()
+    df2_new=showMissingValues(df2)
+
+    context={'PRG_STUDENT_SITE':df_new.to_dict('split'),
+             'ADR_STUDENTS':df1_new.to_dict('split'),
+             'STUDENT_INTERNSHIP':df2_new.to_dict('split')
+            }
+    print(context)
     return render(request, 'etl.html', context)
 
 def maps(request):

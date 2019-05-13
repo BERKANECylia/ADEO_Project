@@ -26,7 +26,7 @@ class ADR_STUDENTS(models.Model):
 class STUDENT_INTERNSHIP(models.Model):
     ANNEE           =models.CharField(max_length=120)
     ANNEE_SCOLAIRE  =models.CharField(max_length=120)
-    ENTERPRISE      =models.CharField(max_length=120)
+    ENTREPRISE      =models.CharField(max_length=120)
     CODE_POSTAL     =models.CharField(max_length=120)
     VILLE           =models.CharField(max_length=120)
     PAYS            =models.CharField(max_length=120)

@@ -5,16 +5,19 @@
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">ETL</h1>
+
       <div class="btn-toolbar mb-2 mb-md-0">
+        <label class="mdb-main-label">Select File Version:</label>
+        <select class="mdb-select md-form colorful-select dropdown-dark">
+          <option value="1">V1 - 31/01/2017</option>
+          <option value="2">V2 - 31/01/2017</option>
+          <option value="3">V3 - 31/01/2017</option>
+        </select>
         <div class="btn-group mr-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          <button type="button" class="btn btn-sm btn-outline-primary">Apply</button>
         </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-          <span data-feather="calendar"></span>
-          This week
-        </button>
       </div>
+      
     </div>
    
 
@@ -39,7 +42,7 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for a,b in data %}
+                  {% for a,b in PRG_STUDENT_SITE.data %}
                   <tr>
                       <td>{{ a }}</td>
                       <td>{{ b }}</td>
@@ -74,7 +77,7 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for a,b in data %}
+                  {% for a,b in ADR_STUDENTS.data %}
                   <tr>
                       <td>{{ a }}</td>
                       <td>{{ b }}</td>
@@ -109,7 +112,7 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for a,b in data %}
+                  {% for a,b in STUDENT_INTERNSHIP.data %}
                   <tr>
                       <td>{{ a }}</td>
                       <td>{{ b }}</td>
