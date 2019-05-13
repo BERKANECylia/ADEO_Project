@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from dataCRUD.models import *
-from .scriptETL import showMissingValues
+from .scriptETL import *
 
 # Create your views here.
 def home(request):
@@ -23,24 +23,29 @@ def descriptiveStats(request):
     return render(request, 'descriptiveStats2.html', context)
 
 def etl(request):
-    qs = PRG_STUDENT_SITE.pdobjects.all()
-    df = qs.to_dataframe()
-    df_new=showMissingValues(df)
+    df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
 
-    qs1 = ADR_STUDENTS.pdobjects.all()
-    df1 = qs1.to_dataframe()
-    df1_new=showMissingValues(df1)
+    df1_new=showMissingValues( ADR_STUDENTS.pdobjects.all().to_dataframe() )
 
-    qs2 = STUDENT_INTERNSHIP.pdobjects.all()
-    df2 = qs2.to_dataframe()
-    df2_new=showMissingValues(df2)
+    df2_new=showMissingValues( STUDENT_INTERNSHIP.pdobjects.all().to_dataframe() )
 
     context={'PRG_STUDENT_SITE':df_new.to_dict('split'),
              'ADR_STUDENTS':df1_new.to_dict('split'),
              'STUDENT_INTERNSHIP':df2_new.to_dict('split')
             }
-    print(context)
+    
     return render(request, 'etl.html', context)
+
+def etl_mergetables(request):
+    context=mergeTables(
+        ADR_STUDENTS.pdobjects.all().to_dataframe() ,
+        PRG_STUDENT_SITE.pdobjects.all().to_dataframe() ,
+        STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
+    )
+    df=showMissingValues( mergedTables.pdobjects.all().to_dataframe() )
+    context={'MERGEDTABLES':df.to_dict('split')
+            }
+    return render(request, 'etl_mergedtables.html', context)
 
 def maps(request):
     return render(request, 'maps.html')

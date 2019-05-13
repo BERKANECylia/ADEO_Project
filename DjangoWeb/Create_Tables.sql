@@ -38,17 +38,17 @@
 
 -- drop table "adr_students_temp";
 
-INSERT INTO "ADR_STUDENTS" (
-    ADR_CP, ADR_VILLE ,
-    ADR_PAYS ,   ID_ANO ,
-    idCSV
-)
-    SELECT 
-    ADR_CP, ADR_VILLE ,
-    ADR_PAYS ,   ID_ANO ,
-    1
-    FROM "adr_students_temp1";
-    
+-- INSERT INTO "ADR_STUDENTS" (
+--     ADR_CP, ADR_VILLE ,
+--     ADR_PAYS ,   ID_ANO ,
+--     idCSV
+-- )
+--     SELECT 
+--     ADR_CP, ADR_VILLE ,
+--     ADR_PAYS ,   ID_ANO ,
+--     1
+--     FROM "adr_students_temp1";
+
 -- create table STUDENT_INTERNSHIP (
 --     id integer primary key autoincrement,
 --     ANNEE TEXT,
