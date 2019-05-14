@@ -18,25 +18,32 @@
 <body  id="bg-img">
 
     <header class="site-header" >
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-steel fixed-top" >
-        <div class="container"> 
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-steel fixed-top" >
+        <div class="container-fluid">
+
+
           <a class="navbar-brand mr-4" href="{% url 'homescreen-home-1' %}">
                 <img src={% static 'logo.jpg' %} class="rounded" height="45" width="50">
           </a>
-          <!--<a class="navbar-brand mr-4" href="{% url 'homescreen-home-1' %}"> GSI</a> -->
+            <div class="row justify-content-center mr-auto" >
+                <img src={% static 'textlogo.png' %} class="rounded" height="45" width="auto">
+                <!-- <h3 class="text-center" style="color:#f4df41"> GEOGRAPHICAL STATISTICS OF STUDENT INTERNSHIPS </h3> -->
+              </div>
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
 
               <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" style="color:#f4df41" href="{% url 'homescreen-home-1' %}">Home</a>
-              <a class="nav-item nav-link" style="color:#f4df41" href="{% url 'contact' %}">Contact us</a>
+              <a class="nav-item nav-link ml-lg-5" style="color:#f4df41" href="{% url 'homescreen-home-1' %}">Home</a>
+              <a class="nav-item nav-link ml-lg-5" style="color:#f4df41" href="{% url 'contact' %}">Contact us</a>
+                  <a class="nav-item nav-link ml-lg-5" style="color:#f4df41" href="{% url 'login' %}">Login</a>
+               <a class="nav-item nav-link ml-lg-5" style="color:#f4df41" href="{% url 'register' %}">Register</a>
               </div>
 
-              <div class="row justify-content-center mr-auto" >
-                <h3 class="text-center" style="color:#f4df41"> GEOGRAPHICAL STATISTICS OF STUDENT INTERNSHIPS </h3>
-              </div>
+
 
             <!-- Navbar Right Side -->
             <div class="navbar-nav mr-auto">
@@ -49,8 +56,7 @@
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
               {% endif %}
             -->
-            <a class="nav-item nav-link" style="color:#f4df41" href="{% url 'login' %}">Login</a>
-            <a class="nav-item nav-link" style="color:#f4df41" href="{% url 'register' %}">Register</a>
+
               
             </div>
           </div>

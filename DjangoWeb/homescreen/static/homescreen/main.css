@@ -1,6 +1,6 @@
 #bg-img
 {
-background:url("../bg.jpg") no-repeat ;
+background:url("../bg3.jpg") no-repeat ;
 background-size:cover;
 }
 
@@ -74,7 +74,7 @@ body {
   
   .article-svg {
     width: 25px;
-    height: 25px;
+    height: 25px;²
     vertical-align: middle;
   }
   

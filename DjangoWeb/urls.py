@@ -21,6 +21,7 @@ urlpatterns = [
     path('Interface/', views.home, name='home'),
     path('Interface/descriptiveStats', views.descriptiveStats, name='descriptiveStats'),
     path('Interface/maps', views.maps, name='maps'),
+    path('Interface/contact_us',view.contact_us,name='contact_us'),
     # path('', views.home, name='home'),
     # path('contact/', views.contact, name='contact'),
     # path('about/', views.about, name='about'),
