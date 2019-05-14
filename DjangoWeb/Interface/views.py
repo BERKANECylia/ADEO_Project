@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from dataCRUD.models import *
 from .scriptETL import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -11,6 +13,7 @@ def home(request):
 #     context={'query_results':query_results}
 #     return render(request, 'descriptiveStats.html', context)
 
+@login_required
 def descriptiveStats(request):
     # https://simpleisbetterthancomplex.com/tutorial/2016/12/06/how-to-create-group-by-queries.html
             #     City.objects.values('country__name') \
@@ -22,6 +25,7 @@ def descriptiveStats(request):
     context={'query_results':query_results}
     return render(request, 'descriptiveStats2.html', context)
 
+@login_required
 def etl(request):
     df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
 
@@ -36,6 +40,7 @@ def etl(request):
     
     return render(request, 'etl.html', context)
 
+@login_required
 def etl_mergetables(request):
     context=mergeTables(
         ADR_STUDENTS.pdobjects.all().to_dataframe() ,
@@ -47,5 +52,6 @@ def etl_mergetables(request):
             }
     return render(request, 'etl_mergedtables.html', context)
 
+@login_required
 def maps(request):
     return render(request, 'maps.html')

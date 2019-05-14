@@ -30,6 +30,12 @@ ALLOWED_HOSTS = []
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
+    ##### 14-05-19 ###
+    'homescreen.apps.HomescreenConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
+    ######
+
     'app',
     'Interface.apps.InterfaceConfig',
     # Add your apps here to enable them
@@ -120,3 +126,23 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 # Store CSV file 
 MEDIA_ROOT=os.path.join(BASE_DIR, 'CSVFile')
 MEDIA_URL='/CSV/'
+
+
+#### 14-05- 19####
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'home'     ## this must be linked to the interface app of gustavo
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'homescreen-home-1'
+# for forget password EMAIL CONFIG
+ 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+#######

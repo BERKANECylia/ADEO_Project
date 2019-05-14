@@ -13,22 +13,30 @@ from Interface import views
 
 from UploadingFile.views import uploadCSV
 
-
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+### 14-05-19 ###
+from django.contrib.auth import views as auth_views
+#from PRG_STUDENT_SITE.views import PRG_STUDENT_SITE_View
+from Interface import views
+from UploadingFile.views import uploadCSV
+from django.conf import settings
+from django.conf.urls.static import static
+######
 
 
 urlpatterns = [
     
     # url(r'^admin/', include(admin.site.urls)),
-
+    path('admin/', admin.site.urls),
     path('Interface/', views.home, name='home'),
     path('Interface/descriptiveStats', views.descriptiveStats, name='descriptiveStats'),
     path('Interface/maps', views.maps, name='maps'),
     path('Interface/etl', views.etl, name='etl'),
     path('Interface/etl_mergetables', views.etl_mergetables, name='etl_mergetables'),
-    path('', views.home, name='home'),
+    #path('', views.home, name='home'),
     #path('contact/', views.contact, name='contact'),
     #path('about/', views.about, name='about'),
     #path('login/',
@@ -47,7 +55,23 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('Interface/dataCRUD/',PRG_STUDENT_SITE_View, name='dataCRUD'), # Url to programstudentsite module
     #url(r'^upload/csv/$', views.upload_csv, name='upload_csv'),
-    path('Interface/uploadcsv/',uploadCSV,name='uploadCSV')
+    path('Interface/uploadcsv/',uploadCSV,name='uploadCSV'),
+
+    ### 14-05-19 ### edit by Indu## 
+ #   path('PRGSTUDENTSITE/',PRG_STUDENT_SITE_View, name='PRGSTUDENTSITE'), # Url to programstudentsite module
+    #url(r'^upload/csv/$', views.upload_csv, name='upload_csv'),
+ #   path('uploadcsv/',uploadCSV,name='uploadCSV'),
+
+
+    path('',include('homescreen.urls')),
+    path('register/',include('users.urls')),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='homescreen/home.html'),name='logout'),
+    path('password-reset/',auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view( template_name='users/password_reset_done.html'),name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),name='password_reset_confirm'),
+    path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),
+   #########
 ]
 
 if settings.DEBUG:
