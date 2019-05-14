@@ -1,0 +1,14 @@
+{% extends "homescreen/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <h1>Contact</h1>
+
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
