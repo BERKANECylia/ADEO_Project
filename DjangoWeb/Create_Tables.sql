@@ -8,22 +8,24 @@
 --     idCSV int
 -- );
 
--- INSERT INTO mergedtables2 (
+-- ALTER TABLE mergedtables ADD COLUMN idCSV int;
+
+-- INSERT INTO mergedtables (
 --     ID_ANO , PRG , 
 --     ANNEE_SCOLAIRE , SITE , ADR_CP  , 
 --     ADR_VILLE , ADR_PAYS  , ANNEE , 
 --     ENTREPRISE , CODE_POSTAL , VILLE  ,
---     PAYS , SUJET , REMUNERATION )
+--     PAYS , SUJET , REMUNERATION, idCSV )
 
 --     SELECT     ID_ANO , PRG , 
 --     ANNEE_SCOLAIRE , SITE , ADR_CP  , 
 --     ADR_VILLE , ADR_PAYS  , ANNEE , 
 --     ENTREPRISE , CODE_POSTAL , VILLE  ,
---     PAYS , SUJET , REMUNERATION
+--     PAYS , SUJET , REMUNERATION, 1
     
---     FROM mergedtables;
+--     FROM mergedtables_OLD;
 
---     SELECT COUNT(*) FROM mergedtables2;
+    SELECT COUNT(*) FROM mergedtables;
 
 --     ALTER TABLE mergedtables RENAME TO mergedtables_OLD;
 
