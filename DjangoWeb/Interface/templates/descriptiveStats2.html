@@ -1,5 +1,89 @@
 {% extends "base.html" %}
 
+
+<script>
+{% block jquery %}
+$.ajax({
+    success: function(data) {
+        setchart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+prgcolorset = [
+    'rgba(73,170,30,0.4)',
+    'rgba(50, 106, 21,0.4)',
+    'rgba(219, 58, 29,0.4)',
+    'rgba(150, 58, 29, 0.4)',
+    'rgba(60, 206, 209, 0.4)',
+    'rgba(60, 157, 209, 0.4)',
+    'rgba(60, 90, 209, 0.4)',
+    'rgba(280, 243, 36, 0.4)',
+    'rgba(230, 243, 36, 0.4)',
+]
+prgcolorborderset =[
+    'rgba(73,170,30,1)',
+    'rgba(50, 106, 21,1)',
+    'rgba(219, 58, 29, 1)',
+    'rgba(150, 58, 29, 1)',
+    'rgba(60, 206, 209, 1)',
+    'rgba(60, 157, 209, 1)',
+    'rgba(60, 90, 209, 1)',
+    'rgba(280, 243, 36, 1)',
+    'rgba(230,243, 36, 1)',
+
+]
+function setchart() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    ctx.shadowBlur=20;
+    ctx.shadowColor="black";
+    var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:[1,2,2,2,3,3,3,4,4] ,
+                datasets: [{
+                    label: '# of students',
+                    data: [1,1,2,2,3,3,3,4,4],
+            backgroundColor: prgcolorset ,
+            borderColor: prgcolorborderset,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+
+        title: {
+            display: true,
+            text: 'Students in department'
+        },
+
+        legend: {
+            display: true,
+            position:'bottom',
+        },
+        tooltips: {
+            mode: 'x'
+        }
+    }
+});
+
+}
+{% endblock %}
+</script>
+
+
+
+
+
+
 {% block content %}
 
 
@@ -49,6 +133,8 @@
     </div>
   </div>
 </div>
+
+
 
     <h2>Program Data</h2>
     <div class="table-responsive">
