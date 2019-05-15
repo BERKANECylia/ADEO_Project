@@ -44,7 +44,7 @@
       <span data-feather="activity"></span> GSSI
   </a>
   <input class="form-control form-control-dark text-light bg-dark w-100 col-md-8 border border-light " type="text" placeholder="Search" aria-label="Search">
-      <a class="nav-item nav-link " style="color:#f4df41" href="{% url 'contact' %}">Contact us</a>
+      <a class="nav-item nav-link " style="color:#f4df41" href="{% url 'contact_us' %}">Contact us</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
 
@@ -117,39 +117,41 @@
               </a>
           </li>
         </ul>
+          {% if user.is_superuser %}
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Administration</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/uploadcsv">
-              <span data-feather="file-plus"></span>
-              Add New Data
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/etl">
-              <span data-feather="layers"></span>
-              ETL
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
-              <span data-feather="database"></span>
-              SHOW Data
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
-              <span data-feather="database"></span>
-              Users
-            </a>
-          </li>
-        </ul>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Administration</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                  <span data-feather="plus-circle"></span>
+                </a>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/uploadcsv">
+                    <span data-feather="file-plus"></span>
+                    Add New Data
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/etl">
+                    <span data-feather="layers"></span>
+                    ETL
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/dataCRUD">
+                    <span data-feather="database"></span>
+                    SHOW Data
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/dataCRUD">
+                    <span data-feather="database"></span>
+                    Users
+                  </a>
+                </li>
+              </ul>
+        {% endif %}
       </div>
     </nav>
 
