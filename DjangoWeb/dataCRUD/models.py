@@ -6,7 +6,7 @@ class PRG_STUDENT_SITE(models.Model):
     PRG          =models.CharField(max_length=120)
     ANNE_SCOLAIRE=models.CharField(max_length=120)
     SITE         =models.CharField(max_length=120)
-    idCSV        =models.IntegerField()
+    idCSV        =models.IntegerField(blank=True, null=True)
         
     #objects      =models.Manager()
     objects      =DataFrameManager()
@@ -20,10 +20,10 @@ class ADR_STUDENTS(models.Model):
     ADR_VILLE   =models.CharField(max_length=120)
     ADR_PAYS    =models.CharField(max_length=2)
     ID_ANO      =models.IntegerField()
-    idCSV       =models.IntegerField()
+    idCSV       =models.IntegerField(blank=True, null=True)
 
-    objects      =DataFrameManager()
-    pdobjects = DataFrameManager()
+    objects     =DataFrameManager()
+    pdobjects   = DataFrameManager()
 
     class Meta:
         db_table='ADR_STUDENTS'
@@ -38,7 +38,7 @@ class STUDENT_INTERNSHIP(models.Model):
     SUJET           =models.CharField(max_length=120)
     REMUNERATION    =models.FloatField()
     ID_ANO          =models.IntegerField()
-    idCSV           =models.IntegerField()
+    idCSV           =models.IntegerField(blank=True, null=True)
 
     objects         =DataFrameManager()
     pdobjects       =DataFrameManager()
@@ -63,10 +63,10 @@ class mergedTables(models.Model):
     SUJET           =models.CharField(max_length=120)
     REMUNERATION    =models.CharField(max_length=120)
     # REMUNERATION =models.DecimalField()
-    idCSV           =models.IntegerField()
+    idCSV           =models.IntegerField(blank=True, null=True)
 
-    objects         = models.Manager()
-    pdobjects       = DataFrameManager() 
+    objects         =DataFrameManager()
+    pdobjects       =DataFrameManager() 
 
     class Meta:
         db_table = 'mergedtables'
