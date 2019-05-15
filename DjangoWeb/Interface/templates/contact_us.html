@@ -1,4 +1,6 @@
-﻿{% load static %}
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
 <!doctype html>
 {% include 'js.html' %}
 
@@ -9,10 +11,10 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Intership Stats</title>
+    <title> GSSI</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-    
+
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %} " rel="stylesheet" type="text/css">
     <!-- <link rel="stylesheet" href="{% static 'bootstrap-table.css"> -->
@@ -39,55 +41,53 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'home' %}">
-    <img src={% static 'logo.jpg' %} class="rounded" height="35" width="40">
-      <span data-feather="activity"></span> GSSI
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+      <span data-feather="activity"></span>
+    Intership Stats
   </a>
-  <input class="form-control form-control-dark text-light bg-dark w-100 col-md-8 border border-light " type="text" placeholder="Search" aria-label="Search">
-      <a class="nav-item nav-link " style="color:#f4df41" href="{% url 'contact' %}">Contact us</a>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-
-      <a class="nav-link" style="color:#f4df41" href="{% url 'logout' %} " >Sign out</a>
+      <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
     </li>
   </ul>
 </nav>
 
-<div class="container-fluid mt-2">
+<div class="container-fluid">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
-        <ul class="nav flex-column mt-2" >
+        <ul class="nav flex-column">
           <li class="nav-item">
                 <a class="nav-link" href="/Interface/">
                   <span data-feather="home"></span>
                   Home
                 </a>
           </li>
-          <li class="nav-item">      
+          <li class="nav-item">
             <a class="nav-link" href="/Interface/descriptiveStats"
-               id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">            
+               id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
               <span data-feather="codepen"></span>
-              Descriptive Statistics               
+              Descriptive Statistics
             </a>
             <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
               <li>
                   <a class="nav-link" href="/Interface/descriptiveStats">
                     <span data-feather="codepen"></span>
                     Table Statistics
-                  </a>               
+                  </a>
               </li>
               <li>
                   <a class="nav-link" href="/Interface/descriptiveStats">
                     <span data-feather="filter"></span>
                     Filter
-                  </a>             
+                  </a>
               </li>
               <li>
                   <a class="nav-link" href="/Interface/maps">
                     <span data-feather="map"></span>
                     Maps
-                  </a>          
+                  </a>
               </li>
             </ul>
           </li>
@@ -138,13 +138,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
+            <a class="nav-link" href="/Interface/dataCRUD">
               <span data-feather="database"></span>
               SHOW Data
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
+            <a class="nav-link" href="/Interface/dataCRUD">
               <span data-feather="database"></span>
               Users
             </a>
@@ -156,7 +156,15 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       {% block content %}
-      
+       <div class="content-section">
+        <h1>Contact</h1>
+
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
       {% endblock %}
     </main>
 

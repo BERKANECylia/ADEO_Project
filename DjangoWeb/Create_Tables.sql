@@ -8,7 +8,8 @@
 --     idCSV int
 -- );
 
--- ALTER TABLE mergedtables ADD COLUMN idCSV int;
+ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
+
 
 -- INSERT INTO mergedtables (
 --     ID_ANO , PRG , 
@@ -25,7 +26,7 @@
     
 --     FROM mergedtables_OLD;
 
-    SELECT COUNT(*) FROM mergedtables;
+    /* SELECT COUNT(*) FROM mergedtables; */
 
 --     ALTER TABLE mergedtables RENAME TO mergedtables_OLD;
 
