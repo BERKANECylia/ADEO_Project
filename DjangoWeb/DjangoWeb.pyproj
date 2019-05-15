@@ -37,6 +37,15 @@
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="homescreen\admin.py" />
+    <Compile Include="homescreen\apps.py" />
+    <Compile Include="homescreen\forms.py" />
+    <Compile Include="homescreen\migrations\__init__.py" />
+    <Compile Include="homescreen\models.py" />
+    <Compile Include="homescreen\tests.py" />
+    <Compile Include="homescreen\urls.py" />
+    <Compile Include="homescreen\views.py" />
+    <Compile Include="homescreen\__init__.py" />
     <Compile Include="Interface\admin.py" />
     <Compile Include="Interface\apps.py" />
     <Compile Include="Interface\forms.py" />
@@ -56,6 +65,7 @@
     <Compile Include="dataCRUD\tests.py" />
     <Compile Include="dataCRUD\views.py" />
     <Compile Include="dataCRUD\__init__.py" />
+    <Compile Include="settings.py" />
     <Compile Include="UploadingFile\admin.py" />
     <Compile Include="UploadingFile\apps.py" />
     <Compile Include="UploadingFile\migrations\__init__.py" />
@@ -63,6 +73,18 @@
     <Compile Include="UploadingFile\tests.py" />
     <Compile Include="UploadingFile\views.py" />
     <Compile Include="UploadingFile\__init__.py" />
+    <Compile Include="urls.py" />
+    <Compile Include="users\admin.py" />
+    <Compile Include="users\apps.py" />
+    <Compile Include="users\forms.py" />
+    <Compile Include="users\migrations\__init__.py" />
+    <Compile Include="users\models.py" />
+    <Compile Include="users\tests.py" />
+    <Compile Include="users\urls.py" />
+    <Compile Include="users\views.py" />
+    <Compile Include="users\__init__.py" />
+    <Compile Include="wsgi.py" />
+    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\" />
@@ -82,6 +104,14 @@
     <Folder Include="CSVFile\" />
     <Folder Include="DjangoWeb\" />
     <Folder Include="DjangoWeb\__pycache__\" />
+    <Folder Include="homescreen\" />
+    <Folder Include="homescreen\migrations\" />
+    <Folder Include="homescreen\migrations\__pycache__\" />
+    <Folder Include="homescreen\static\" />
+    <Folder Include="homescreen\static\homescreen\" />
+    <Folder Include="homescreen\templates\" />
+    <Folder Include="homescreen\templates\homescreen\" />
+    <Folder Include="homescreen\__pycache__\" />
     <Folder Include="Interface\" />
     <Folder Include="Interface\migrations\" />
     <Folder Include="Interface\static\" />
@@ -97,6 +127,12 @@
     <Folder Include="dataCRUD\__pycache__\" />
     <Folder Include="UploadingFile\" />
     <Folder Include="UploadingFile\migrations\" />
+    <Folder Include="users\" />
+    <Folder Include="users\migrations\" />
+    <Folder Include="users\migrations\__pycache__\" />
+    <Folder Include="users\templates\" />
+    <Folder Include="users\templates\users\" />
+    <Folder Include="users\__pycache__\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\migrations\__pycache__\__init__.cpython-37.pyc" />
@@ -118,7 +154,39 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\index.html" />
     <Content Include="app\templates\app\adminDashboard.html" />
+    <Content Include="Create_Tables.sql" />
+    <Content Include="dashboard.OLD" />
+    <Content Include="homescreen\migrations\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="homescreen\static\bg.jpg" />
+    <Content Include="homescreen\static\chicago.jpg" />
+    <Content Include="homescreen\static\homescreen\la.jpg" />
+    <Content Include="homescreen\static\homescreen\main.css" />
+    <Content Include="homescreen\static\la.jpg" />
+    <Content Include="homescreen\static\la1.jpg" />
+    <Content Include="homescreen\static\la2.jpg" />
+    <Content Include="homescreen\static\la3.jpg" />
+    <Content Include="homescreen\static\la4.jpg" />
+    <Content Include="homescreen\static\laa1.jpg" />
+    <Content Include="homescreen\static\laa3.jpg" />
+    <Content Include="homescreen\static\laaa4.jpg" />
+    <Content Include="homescreen\static\laaa6.jpg" />
+    <Content Include="homescreen\static\logo.jpg" />
+    <Content Include="homescreen\static\ny.jpg" />
+    <Content Include="homescreen\templates\homescreen\about.html" />
+    <Content Include="homescreen\templates\homescreen\base.html" />
+    <Content Include="homescreen\templates\homescreen\contact.html" />
+    <Content Include="homescreen\templates\homescreen\contact_template.txt" />
+    <Content Include="homescreen\templates\homescreen\home.html" />
+    <Content Include="homescreen\__pycache__\admin.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\apps.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\forms.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\models.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\urls.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\views.cpython-37.pyc" />
+    <Content Include="homescreen\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="Interface\templates\dataCRUD1.html" />
+    <Content Include="Interface\templates\etl.html" />
+    <Content Include="Interface\templates\etl_mergedtables.html" />
     <Content Include="Interface\templates\uploadcsv.html" />
     <Content Include="app\__pycache__\forms.cpython-37.pyc" />
     <Content Include="app\__pycache__\models.cpython-37.pyc" />
@@ -164,6 +232,8 @@
     <Content Include="Interface\templates\home.html" />
     <Content Include="Interface\templates\maps.html" />
     <Content Include="Interface\templates\dataCRUD.html" />
+    <Content Include="mergedTable.csv" />
+    <Content Include="mergedTableNo1.csv" />
     <Content Include="obj\Debug\DjangoWeb.pyproj.FileListAbsolute.txt" />
     <Content Include="dataCRUD\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="dataCRUD\migrations\__pycache__\__init__.cpython-37.pyc" />
@@ -184,6 +254,22 @@
     <Content Include="app\templates\app\layoutOriginal.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="sqlite3.exe" />
+    <Content Include="users\migrations\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="users\templates\users\login.html" />
+    <Content Include="users\templates\users\logout.html" />
+    <Content Include="users\templates\users\password_reset.html" />
+    <Content Include="users\templates\users\password_reset_complete.html" />
+    <Content Include="users\templates\users\password_reset_confirm.html" />
+    <Content Include="users\templates\users\password_reset_done.html" />
+    <Content Include="users\templates\users\register.html" />
+    <Content Include="users\__pycache__\admin.cpython-37.pyc" />
+    <Content Include="users\__pycache__\apps.cpython-37.pyc" />
+    <Content Include="users\__pycache__\forms.cpython-37.pyc" />
+    <Content Include="users\__pycache__\models.cpython-37.pyc" />
+    <Content Include="users\__pycache__\urls.cpython-37.pyc" />
+    <Content Include="users\__pycache__\views.cpython-37.pyc" />
+    <Content Include="users\__pycache__\__init__.cpython-37.pyc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">

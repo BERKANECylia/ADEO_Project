@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DjangoWeb"
+    "\\DjangoWeb",
+    "\\DjangoWeb\\DjangoWeb"
   ],
   "PreviewInSolutionExplorer": false
 }
