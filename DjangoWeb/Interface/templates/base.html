@@ -1,5 +1,7 @@
 ﻿{% load static %}
 <!doctype html>
+{% include 'js.html' %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -37,23 +39,25 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-      <span data-feather="activity"></span>
-    Intership Stats
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'home' %}">
+    <img src={% static 'logo.jpg' %} class="rounded" height="35" width="40">
+      <span data-feather="activity"></span> GSSI
   </a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <input class="form-control form-control-dark text-light bg-dark w-100 col-md-8 border border-light " type="text" placeholder="Search" aria-label="Search">
+      <a class="nav-item nav-link " style="color:#f4df41" href="{% url 'contact_us' %}">Contact us</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+
+      <a class="nav-link" style="color:#f4df41" href="{% url 'logout' %} " >Sign out</a>
     </li>
   </ul>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid mt-2">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
-        <ul class="nav flex-column">
+        <ul class="nav flex-column mt-2" >
           <li class="nav-item">
                 <a class="nav-link" href="/Interface/">
                   <span data-feather="home"></span>
@@ -113,39 +117,41 @@
               </a>
           </li>
         </ul>
+          {% if user.is_superuser %}
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Administration</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/uploadcsv">
-              <span data-feather="file-plus"></span>
-              Add New Data
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/etl">
-              <span data-feather="layers"></span>
-              ETL
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
-              <span data-feather="database"></span>
-              SHOW Data
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Interface/dataCRUD"> 
-              <span data-feather="database"></span>
-              Users
-            </a>
-          </li>
-        </ul>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Administration</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                  <span data-feather="plus-circle"></span>
+                </a>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/uploadcsv">
+                    <span data-feather="file-plus"></span>
+                    Add New Data
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/etl">
+                    <span data-feather="layers"></span>
+                    ETL
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/dataCRUD">
+                    <span data-feather="database"></span>
+                    SHOW Data
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Interface/dataCRUD">
+                    <span data-feather="database"></span>
+                    Users
+                  </a>
+                </li>
+              </ul>
+        {% endif %}
       </div>
     </nav>
 
@@ -169,5 +175,11 @@
         <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      {% block jquery %}{% endblock %}
+    })
+    </script>
       </body>
 </html>

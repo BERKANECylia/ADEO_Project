@@ -3,6 +3,12 @@ from dataCRUD.models import *
 from .scriptETL import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
+from django.template.loader import get_template
+from .forms import ContactForm
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 @login_required
@@ -27,6 +33,7 @@ def descriptiveStats(request):
     return render(request, 'descriptiveStats2.html', context)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def etl(request):
     df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
 
@@ -84,3 +91,43 @@ def etl_mergetablesRF(request):
 @login_required
 def maps(request):
     return render(request, 'maps.html')
+
+@login_required
+def contact_us(request):
+    form_class = ContactForm
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', '')
+            contact_email = request.POST.get('contact_email', '')
+            form_content = request.POST.get('content', '')
+
+            # Email the profile with the
+            # contact information
+            template = get_template('contacttemplate.txt')
+            context = {
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'form_content': form_content,
+                }
+            content = template.render(context)
+
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "Your website" +'',
+                ['induraj2020@gmail.com'],
+                headers = {'Reply-To': contact_email }
+            )
+            email.send()
+            return redirect('home')
+
+    return render(request, 'contact_us.html', {
+        'form': form_class,
+    })
+
+
+def checking(request):
+    return render(request,'checking.html')
+    #return HttpResponse('<h1> hi </h1>')
