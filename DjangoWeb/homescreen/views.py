@@ -48,7 +48,7 @@ def contact(request):
                 headers = {'Reply-To': contact_email }
             )
             email.send()
-            return redirect('homescreen-home-1')
+            return redirect('contact')
 
     return render(request, 'homescreen/contact.html', {
         'form': form_class,

@@ -31,9 +31,6 @@ urlpatterns = [
     
     # url(r'^admin/', include(admin.site.urls)),
     path('admin/', admin.site.urls),
-
-    path('Interface/checking', views.checking, name='checking'),
-
     path('Interface/', views.home, name='home'),
     path('Interface/descriptiveStats', views.descriptiveStats, name='descriptiveStats'),
     path('Interface/maps', views.maps, name='maps'),
