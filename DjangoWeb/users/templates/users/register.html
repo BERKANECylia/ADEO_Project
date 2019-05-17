@@ -3,12 +3,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-     <div class="offset-2 col-md-8">
-    <div class="content-section">
+     <div class="offset-3 col-md-6">
+    <div class="content-section text-white mt-5 p-4" style="background:#3a414c;">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Register</legend>
+                <legend class="border-bottom mb-4" style= "color:white">Register</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
