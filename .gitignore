@@ -8,3 +8,9 @@ DjangoWeb/DjangoWeb/__pycache__/urls.cpython-37.pyc
 DjangoWeb/DjangoWeb/__pycache__/urls.cpython-37.pyc
 DjangoWeb/db.sqlite3
 ADR_STUDENTS_2017_2018_DATA_TABLE.csv
+*.pyc
+~$mergedTable.xlsx
+.vscode/settings.json
+*.pyc
+DjangoWeb/app/__pycache__/__init__.cpython-37.pyc
+DjangoWeb/app/__pycache__/__init__.cpython-37.pyc

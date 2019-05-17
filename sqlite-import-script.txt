@@ -1,0 +1,25 @@
+sqlite.exe db.sqlite3
+
+delete from ADR_STUDENTS;
+VACUUM; 
+
+.open db.sqlite3
+.mode csv
+.separator ","
+
+.import H:\\Documents\\GitHub\\ADEO_Project\\ADR.csv temp_ADR1
+
+.import  H:\\Documents\\GitHub\\ADEO_Project\\STU.csv temp_STU1
+
+.import  H:\\Documents\\GitHub\\ADEO_Project\\PRG.csv temp_PRG1
+
+select count(*) from temp_ADR3;
+select count(*) from temp_STU3;
+select count(*) from temp_PRG3;
+
+
+select * from temp_ADR1;
+
+drop table temp_ADR1;
+drop table temp_STU1;
+drop table temp_PRG1;

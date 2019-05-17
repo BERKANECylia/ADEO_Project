@@ -9,6 +9,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 #from app import forms, views
 from dataCRUD.views import PRG_STUDENT_SITE_View
+#from dataCRUD.views import ADR_STUDENTS_View
 from Interface import views
 
 from UploadingFile.views import uploadCSV
@@ -39,6 +40,7 @@ urlpatterns = [
     path('Interface/maps', views.maps, name='maps'),
     path('Interface/etl', views.etl, name='etl'),
     path('Interface/etl_mergetables', views.etl_mergetables, name='etl_mergetables'),
+    path('Interface/etl_mergetablesRF', views.etl_mergetablesRF, name='etl_mergetablesRF'),
     path('Interface/contact_us',views.contact_us,name='contact_us'),
     #path('', views.home, name='home'),
     #path('contact/', views.contact, name='contact'),
@@ -57,7 +59,11 @@ urlpatterns = [
     #    name='login'),
     #path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     #path('admin/', admin.site.urls),
+    # path('Interface/dataCRUD/PRGSTUDENTSITE/',PRG_STUDENT_SITE_View, name='dataCRUD'), # Url to programstudentsite module
     path('Interface/dataCRUD/',PRG_STUDENT_SITE_View, name='dataCRUD'), # Url to programstudentsite module
+
+    #path('Interface/dataCRUD/ADRSTUDENT/',ADR_STUDENTS_View), # Url to programstudentsite module
+
     #url(r'^upload/csv/$', views.upload_csv, name='upload_csv'),
     path('Interface/uploadcsv/',uploadCSV,name='uploadCSV'),
 
