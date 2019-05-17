@@ -30,6 +30,11 @@ ALLOWED_HOSTS = []
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
+    'homescreen.apps.HomescreenConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
+    'app',
+    'Interface.apps.InterfaceConfig',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,16 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     #Components
-    'homescreen.apps.HomescreenConfig',
-    'users.apps.UsersConfig',
-    'crispy_forms',
-    'app',
-    'Interface.apps.InterfaceConfig',
-    'dataCRUD',
+    'PRG_STUDENT_SITE',
     'UploadingFile',
-
 ]
 
 # Middleware framework

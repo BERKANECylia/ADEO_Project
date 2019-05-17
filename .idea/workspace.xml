@@ -5,15 +5,10 @@
       <change afterPath="$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/models.py" afterDir="false" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
       <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/templates/contact_us.html" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/templates/contact_us.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/views.py" afterDir="false" />
@@ -40,19 +35,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="221">
               <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
-=======
-            <state relative-caret-position="289">
-              <caret line="17" column="52" lean-forward="true" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="20">
@@ -60,48 +49,13 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
-=======
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/etl.html">
+        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-964" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/users/templates/users/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="-2292">
               <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
             </state>
@@ -124,36 +78,16 @@
               <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-=======
-            <state relative-caret-position="238">
-              <caret line="14" column="23" selection-end-line="27" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="350">
               <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-=======
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/etl_mergedtables.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="34" column="61" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="61" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
             </state>
           </provider>
         </entry>
@@ -172,11 +106,8 @@
       <find>conta</find>
       <find>&lt;span data-feather=&quot;filter&quot;&gt;&lt;/span&gt;</find>
       <find>hi</find>
-<<<<<<< HEAD
       <find>jquery</find>
       <find>filter</find>
-=======
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,14 +127,8 @@
         <option value="$PROJECT_DIR$/DjangoWeb/homescreen/views.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/users/views.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" />
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/models.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/DjangoWeb/settings.py" />
-=======
-        <option value="$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html" />
-        <option value="$PROJECT_DIR$/DjangoWeb/Interface/models.py" />
-        <option value="$PROJECT_DIR$/DjangoWeb/Interface/views.py" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" />
         <option value="$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/views.py" />
@@ -213,11 +138,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-<<<<<<< HEAD
     <option name="x" value="952" />
-=======
-    <option name="x" value="-8" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
     <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
@@ -312,11 +233,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18241903" />
-=======
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15730338" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -357,8 +274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-<<<<<<< HEAD
-=======
         </state>
       </provider>
     </entry>
@@ -378,197 +293,6 @@
           <caret line="4" column="40" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/users/templates/users/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="83" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="83" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#legend#0;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/forms.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/templates/homescreen/contact.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/contact_us.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="165" column="66" selection-start-line="165" selection-start-column="66" selection-end-line="165" selection-end-column="66" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/static/bg3.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/static/homescreen/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/homescreen/templates/homescreen/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="68">
-          <caret line="4" column="40" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="40" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-=======
-        <state relative-caret-position="-212">
-          <caret line="122" column="10" selection-start-line="122" selection-start-column="10" selection-end-line="122" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="34" column="61" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/etl_mergedtables.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/forms.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/users/templates/users/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="23" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="104" selection-start-line="11" selection-start-column="104" selection-end-line="11" selection-end-column="104" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/etl.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-964" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
           </folding>
         </state>
       </provider>
@@ -709,7 +433,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="101">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
         </state>
@@ -760,10 +483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
-=======
-        <state relative-caret-position="289">
-          <caret line="17" column="52" lean-forward="true" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
         </state>
       </provider>
     </entry>

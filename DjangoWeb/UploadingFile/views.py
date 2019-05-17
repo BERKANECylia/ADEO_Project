@@ -27,26 +27,18 @@ def uploadCSV(request):
             messages.error(request,"Uploaded file is too big (%.2f MB)." % (myfile.size/(1000*1000),))
             return HttpResponseRedirect(reverse('uploadcsv'))
 
-        
-
         #tableSelected=request.get['tablesDropdown']
         file_data = myfile.read().decode("utf-8")		
         lines = file_data.split("\n")
 		#loop over the lines and save them in db. If error , store as string and then display
         for line in lines:
-            if line.strip():
-            #line = line.strip().strip('\n')
-                line.strip('\n')
-                fields = line.split(",")
-                prg_student_site= PRG_STUDENT_SITE(ID_ANO=fields[1],PRG=fields[2],ANNE_SCOLAIRE=fields[3],SITE=fields[4])
-                try:
-                    prg_student_site.save()
-                except Exception as e:
-                    messages.error(request,"Unable to upload file. "+repr(e))
-        
-        #save file to server
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)   
+            fields = line.split(",")
+            prg_student_site= PRG_STUDENT_SITE(ID_ANO=fields[1],PRG=fields[2],ANNE_SCOLAIRE=fields[3],SITE=fields[4])
+            try:
+                prg_student_site.save()
+            except Exception as e:
+                messages.error(request,"Unable to upload file. "+repr(e))
+           
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)

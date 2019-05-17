@@ -2,7 +2,6 @@ from django.shortcuts import render
 from dataCRUD.models import *
 from .scriptETL import *
 from django.contrib.auth.decorators import login_required
-from django.db.models import Max
 from django.template.loader import get_template
 from .forms import ContactForm
 from django.core.mail import EmailMessage
@@ -49,42 +48,14 @@ def etl(request):
     return render(request, 'etl.html', context)
 
 @login_required
-def etl_mergetables(request):    
-    version=int(mergedTables.objects.all().aggregate(Max('idCSV'))['idCSV__max']) + 1
-    description='Delete Null Values'
-    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
-    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
-       
-    df=mergeTables(ADR,PRG,STU)
-    numberlines = df.ID_ANO.count()
-    table = mergedTables.objects
-    writeDF2Table(df, table, version, description )
-
-    df=showMissingValues( mergedTables.pdobjects.filter(idCSV=version).to_dataframe() )
-    context={'MERGEDTABLES' :df.to_dict('split') ,
-             'NUMBERLINES'  :numberlines ,
-             'VERSION'      :str(version) + " - " + description
-            }
-    return render(request, 'etl_mergedtables.html', context)
-
-@login_required
-def etl_mergetablesRF(request):    
-    version=int(mergedTables.objects.all().aggregate(Max('idCSV'))['idCSV__max']) + 1
-    description='Fill with RandomForest Algorithm'
-    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
-    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
-       
-    df=mergeTables(ADR,PRG,STU)
-    numberlines = df.ID_ANO.count()
-    table = mergedTables.objects
-    writeDF2Table(df, table, version, description )
-
-    df=showMissingValues( mergedTables.pdobjects.filter(idCSV=version).to_dataframe() )
-    context={'MERGEDTABLES' :df.to_dict('split') ,
-             'NUMBERLINES'  :numberlines ,
-             'VERSION'      :str(version) + " - " + description
+def etl_mergetables(request):
+    context=mergeTables(
+        ADR_STUDENTS.pdobjects.all().to_dataframe() ,
+        PRG_STUDENT_SITE.pdobjects.all().to_dataframe() ,
+        STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
+    )
+    df=showMissingValues( mergedTables.pdobjects.all().to_dataframe() )
+    context={'MERGEDTABLES':df.to_dict('split')
             }
     return render(request, 'etl_mergedtables.html', context)
 
@@ -151,10 +122,5 @@ def checking(request):
                }
 
 
-<<<<<<< HEAD
     return render(request,'checking.html',context)
-=======
-def checking(request):
-    return render(request,'checking.html')
->>>>>>> 78370d45b185fc2a8ecb7557ff903d364bc9d846
     #return HttpResponse('<h1> hi </h1>')

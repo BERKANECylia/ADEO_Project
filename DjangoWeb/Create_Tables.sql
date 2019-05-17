@@ -8,7 +8,7 @@
 --     idCSV int
 -- );
 
--- ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
+ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
 
 
 -- INSERT INTO mergedtables (
@@ -29,7 +29,6 @@
     /* SELECT COUNT(*) FROM mergedtables; */
 
 --     ALTER TABLE mergedtables RENAME TO mergedtables_OLD;
- /* ALTER TABLE mergedtables ADD COLUMN idCSVDescript TEXT; */
 
 -- create table ADR_STUDENTS (
 --     id integer primary key autoincrement, 
@@ -50,8 +49,8 @@
 --     SELECT 
 --     ADR_CP, ADR_VILLE ,
 --     ADR_PAYS ,   ID_ANO ,
---     2
---     FROM "temp_ADR1";
+--     1
+--     FROM "adr_students_temp1";
 
 -- create table STUDENT_INTERNSHIP (
 --     id integer primary key autoincrement,
@@ -68,40 +67,11 @@
 -- );
 
 -- INSERT INTO STUDENT_INTERNSHIP (
-    -- ANNEE  ,    ANNEE_SCOLAIRE  ,    ENTREPRISE  ,    CODE_POSTAL  ,
-    -- VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
-    --     idCSV )
-    -- SELECT 
-    -- ANNEE  ,    ANNEE_SCOLAIRE  ,    ENTREPRISE  ,    CODE_POSTAL  ,
-    -- VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
-    -- 1
-    -- FROM "temp_STU1" ;
-
--- INSERT INTO
---   "PRG_STUDENT_SITE" (ANNE_SCOLAIRE, ID_ANO, idCSV, PRG, SITE)
---     SELECT
---         ANNEE_SCOLAIRE, ID_ANO, 2, PRG, SITE
---     FROM "temp_PRG1";
-
-
--- INSERT INTO
---   "PRG_STUDENT_SITE" (ANNE_SCOLAIRE, id, ID_ANO, idCSV, PRG, SITE)
--- VALUES
---   (
---     'ANNE_SCOLAIRE:TEXT',
---     id:INT,
---     ID_ANO:INT,
---     idCSV:int,
---     'PRG:TEXT',
---     'SITE:TEXT'
---   );
-
-
-select a.*, b.*
-    from PRG_STUDENT_SITE a
-      join ADR_STUDENTS b on a.ID_ANO=b.ID_ANO
-;
-
-
--- select count(*) from STUDENT_INTERNSHIP;
-
+--     ANNEE  ,    ANNEE_SCOLAIRE  ,    ENTREPRISE  ,    CODE_POSTAL  ,
+--     VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
+--         idCSV )
+--     SELECT 
+--     ANNEE  ,    ANNEE_SCOLAIRE  ,    ENTREPRISE  ,    CODE_POSTAL  ,
+--     VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
+--     1
+--     FROM "student_inter_temp" ;
