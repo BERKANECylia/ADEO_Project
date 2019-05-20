@@ -7,6 +7,7 @@ from .forms import ContactForm
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 @login_required
@@ -31,6 +32,7 @@ def descriptiveStats(request):
     return render(request, 'descriptiveStats2.html', context)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def etl(request):
     df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
 
@@ -61,6 +63,7 @@ def etl_mergetables(request):
 def maps(request):
     return render(request, 'maps.html')
 
+@login_required
 def contact_us(request):
     form_class = ContactForm
     if request.method == 'POST':
@@ -89,48 +92,76 @@ def contact_us(request):
                 headers = {'Reply-To': contact_email }
             )
             email.send()
-            return redirect('contact_us')
+            return redirect('home')
 
     return render(request, 'contact_us.html', {
         'form': form_class,
     })
 
+#indu 17-may
+def is_valid_queryparam(param):
+    if (param!="Choose..."):
+        return(True)
 
-# def contact_us(request):
-#     form_class = ContactForm
-#
-#     # new logic!
-#     if request.method == 'POST':
-#         form = form_class(data=request.POST)
-#
-#         if form.is_valid():
-#             contact_name = request.POST.get('contact_name', '')
-#             contact_email = request.POST.get('contact_email', '')
-#             form_content = request.POST.get('content', '')
-#
-#             # Email the profile with the
-#             # contact information
-#             template = get_template('Interface/contact_template.txt')
-#             context = {
-#                 'contact_name': contact_name,
-#                 'contact_email': contact_email,
-#                 'form_content': form_content,
-#                 }
-#             content = template.render(context)
-#
-#             email = EmailMessage(
-#                 "New contact form submission",
-#                 content,
-#                 "Your website" +'',
-#                 ['induraj2020@gmail.com'],
-#                 headers = {'Reply-To': contact_email }
-#             )
-#             email.send()
-#             return redirect('contact_us')
-#
-#     return render(request,'Interface/contact_us.html', {'form': form_class,})
+def is_valid_queryparam2(param1,param2):
+    if (param1 != '' and param1 is not None) and (param2 != '' and param2 is not None):
+        return(True)
+
+def checking(request):
+    #query_results= mergedTables.objects.all()
+    #query_results=mergeTables.objects.filter(item=item).distinct('ID_ANO')
+    #query_results= mergedTables.objects.raw('SELECT DISTINCT PRG FROM mergedTables')
+
+    # .count()
+    #context = {'query_results': query_results}
+    query_results=mergedTables.objects.all()
+
+    df_new_prg = return_distinct_prg(mergedTables.pdobjects.all().to_dataframe())
+    df_new_ville = return_distinct_ville(mergedTables.pdobjects.all().to_dataframe())
+    df_new_cp = return_distinct_cp(mergedTables.pdobjects.all().to_dataframe())
+    df_new_rem = return_distinct_rem(mergedTables.pdobjects.all().to_dataframe())
+    df_new_year= return_distinct_year(mergedTables.pdobjects.all().to_dataframe())
 
 
+    prg_filtered= request.GET.get('program')
+    print(prg_filtered)
+    vil_filtered= request.GET.get('ville')
+    print(vil_filtered)
+    cod_filtered= request.GET.get('code_postal')
+    rem_filtered= request.GET.get('remuneration')
+    #print(rem_filtered)
+    yfr_filtered=request.GET.get('years_from')
+    yto_filtered=request.GET.get('years_to')
+    qs= query_results
 
-# def contact_us(request):
-#     return HttpResponse('<h1> hi </h1>')
+
+    if is_valid_queryparam(prg_filtered):
+        qs=query_results.filter(PRG=prg_filtered)
+        #print(prg_filtered)
+
+    elif is_valid_queryparam(vil_filtered):
+        qs=query_results.filter(ADR_VILLE=vil_filtered)
+        print(qs)
+
+    elif is_valid_queryparam(cod_filtered):
+        qs=query_results.filter(ADR_CP=cod_filtered)
+
+    elif is_valid_queryparam(rem_filtered):
+        qs=query_results.filter(REMUNERATION=rem_filtered)
+
+    elif is_valid_queryparam2(yfr_filtered,yto_filtered):
+        qs=query_results.filter(ANNEE_SCOLAIRE__gte=yfr_filtered,ANNEE_SCOLAIRE__lte=yto_filtered)
+
+    #qs = query_results
+
+    context = {'prg': df_new_prg,
+               'ville': df_new_ville,
+               'cp': df_new_cp,
+               'rem': df_new_rem,
+               'year':df_new_year,
+               'query_results':qs,
+               }
+
+
+    return render(request,'checking.html',context)
+    #return HttpResponse('<h1> hi </h1>')
