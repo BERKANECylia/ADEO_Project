@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50308c6c-c587-4ebb-8ae1-28c08ee4b2e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/dataCRUD/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoWeb/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoWeb/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,17 +44,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
+            <state relative-caret-position="203">
               <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="63" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="100" column="63" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="193" column="51" selection-start-line="193" selection-start-column="51" selection-end-line="193" selection-end-column="51" />
+            <state relative-caret-position="329">
+              <caret line="193" column="38" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-393">
+              <caret line="38" column="46" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -68,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="159">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
             </state>
           </provider>
         </entry>
@@ -110,11 +123,11 @@
         <option value="$PROJECT_DIR$/DjangoWeb/DjangoWeb/urls.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/models.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/DjangoWeb/settings.py" />
-        <option value="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" />
         <option value="$PROJECT_DIR$/DjangoWeb/dataCRUD/models.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py" />
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html" />
         <option value="$PROJECT_DIR$/DjangoWeb/Interface/views.py" />
+        <option value="$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html" />
       </list>
     </option>
   </component>
@@ -141,6 +154,19 @@
               <item name="ADEO_Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="ADEO_Project" type="462c0819:PsiDirectoryNode" />
               <item name="DjangoWeb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ADEO_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ADEO_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="DjangoWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="Interface" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ADEO_Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ADEO_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="DjangoWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="Interface" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -215,7 +241,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16060807" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16060807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -229,8 +255,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23087819" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32920793" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23229462" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3243626" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -403,20 +429,6 @@
     <entry file="file://$PROJECT_DIR$/DjangoWeb/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mergedTable.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-408" />
@@ -428,7 +440,7 @@
     <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/scriptETL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
@@ -452,13 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="63" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/checking.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-969">
@@ -472,8 +477,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="193" column="51" selection-start-line="193" selection-start-column="51" selection-end-line="193" selection-end-column="51" />
+        <state relative-caret-position="329">
+          <caret line="193" column="38" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-393">
+          <caret line="38" column="46" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/descriptiveStats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="63" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DjangoWeb/Interface/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="100" column="63" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
         </state>
       </provider>
     </entry>
