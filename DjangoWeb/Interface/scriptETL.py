@@ -28,8 +28,9 @@ def return_distinct_rem(df):
     return (df_Rem_uniq)
 
 def return_distinct_year(df):
-    df_year_uniq = df['ANNEE_SCOLAIRE'].unique().tolist()
+    df_year_uniq = df['ANNEE_SCOLAIRE'].str[:4].unique().tolist()
     return (df_year_uniq)
+
 def redefineDFTypes(df):
     for column in df:
         if column in ['ID_ANO']:

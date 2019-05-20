@@ -130,11 +130,11 @@ def contact_us(request):
 
 #indu 17-may
 def is_valid_queryparam(param):
-    if (param!="Choose..."):
+    if (param!='Choose...'):
         return(True)
 
 def is_valid_queryparam2(param1,param2):
-    if (param1 != '' and param1 is not None) and (param2 != '' and param2 is not None):
+    if (param1!='Choose...') and (param2 != 'Choose...'):
         return(True)
 
 def checking(request):
@@ -154,33 +154,52 @@ def checking(request):
 
 
     prg_filtered= request.GET.get('program')
-    print(prg_filtered)
+    #print(prg_filtered)
     vil_filtered= request.GET.get('ville')
-    print(vil_filtered)
+    #print(vil_filtered)
     cod_filtered= request.GET.get('code_postal')
     rem_filtered= request.GET.get('remuneration')
     #print(rem_filtered)
     yfr_filtered=request.GET.get('years_from')
+    #print(yfr_filtered)
     yto_filtered=request.GET.get('years_to')
     qs= query_results
-
+    message=''
 
     if is_valid_queryparam(prg_filtered):
-        qs=query_results.filter(PRG=prg_filtered)
+        qs=qs.filter(PRG=prg_filtered)
+        #qs= qs & query_results.filter(ADR_VILLE='CERGY' )
+        #print(str(qs.query))
         #print(prg_filtered)
 
-    elif is_valid_queryparam(vil_filtered):
-        qs=query_results.filter(ADR_VILLE=vil_filtered)
+    if is_valid_queryparam(vil_filtered):
+        qs=qs.filter(ADR_VILLE=vil_filtered)
         print(qs)
 
-    elif is_valid_queryparam(cod_filtered):
-        qs=query_results.filter(ADR_CP=cod_filtered)
+    if is_valid_queryparam(cod_filtered):
+        qs=qs.filter(ADR_CP=cod_filtered)
 
-    elif is_valid_queryparam(rem_filtered):
-        qs=query_results.filter(REMUNERATION=rem_filtered)
+    if is_valid_queryparam(rem_filtered):
+        qs=qs.filter(REMUNERATION=rem_filtered)
 
     elif is_valid_queryparam2(yfr_filtered,yto_filtered):
-        qs=query_results.filter(ANNEE_SCOLAIRE__gte=yfr_filtered,ANNEE_SCOLAIRE__lte=yto_filtered)
+        if (yfr_filtered <= yto_filtered):
+            yfr_filtered=(int)(yfr_filtered)
+            yfr_anotherhalf= yfr_filtered+1
+            yto_filtered=(int)(yto_filtered)
+            yto_anotherhalf = yto_filtered + 1
+            yfr_filtered  =(str)(yfr_filtered)
+            yto_filtered  = (str)(yto_filtered)
+            yfr_anotherhalf = (str)(yfr_anotherhalf)
+            yto_anotherhalf = (str)(yto_anotherhalf)
+            yfr_filtered=yfr_filtered + '/' + (yfr_anotherhalf)
+            yto_filtered=yto_filtered + '/' + (yto_anotherhalf)
+            print('\n')
+            print('helllooooooo')
+            print(yfr_filtered)
+            qs=query_results.filter(ANNEE_SCOLAIRE__gte=yfr_filtered,ANNEE_SCOLAIRE__lte=yto_filtered)
+        else:
+            message="Years From-To not correct"
 
     #qs = query_results
 
@@ -189,6 +208,7 @@ def checking(request):
                'cp': df_new_cp,
                'rem': df_new_rem,
                'year':df_new_year,
+               'message':message,
                'query_results':qs,
                }
 
