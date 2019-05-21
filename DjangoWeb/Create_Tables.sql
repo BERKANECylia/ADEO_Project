@@ -8,7 +8,7 @@
 --     idCSV int
 -- );
 
-ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
+-- ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
 
 
 -- INSERT INTO mergedtables (
@@ -75,3 +75,21 @@ ALTER TABLE "PRG_STUDENT_SITE" ADD COLUMN idCSV int;
 --     VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
 --     1
 --     FROM "student_inter_temp" ;
+
+-- DROP TABLE ADR_LOCATION;
+
+-- CREATE TABLE ADR_LOCATION (
+--     id integer primary key autoincrement,
+--     CODE_POSTAL TEXT,
+--     LAT TEXT,
+--     LON TEXT,
+--     PAYS TEXT,
+--     VILLE TEXT,
+--     idCSV int
+--   );
+
+-- INSERT INTO
+--   "ADR_LOCATION" (CODE_POSTAL, idCSV, LAT, LON, PAYS, VILLE)
+-- SELECT CODE_POSTAL, 1, LAT, LON, PAYS, VILLE
+--    FROM temp_LOCATION;
+  
