@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'homescreen.apps.HomescreenConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
-    'tempus_dominus',
+    # 'tempus_dominus',
     ######
 
     'app',
