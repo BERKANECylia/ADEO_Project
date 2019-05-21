@@ -27,7 +27,7 @@ def descriptiveStats(request):
             # .annotate(country_population=Sum('population')) \
             # .order_by('-country_population')
 
-    query_results=mergedTables.objects.all()
+    query_results=mergedTables.objects.all().filter()
     # .count()
     context={'query_results':query_results}
     return render(request, 'descriptiveStats2.html', context)
@@ -57,6 +57,7 @@ def etl_mergetables(request):
     STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
        
     df=mergeTables(ADR,PRG,STU)
+    df=deleteMissingValues(df)
     numberlines = df.ID_ANO.count()
     table = mergedTables.objects
     #writeDF2Table(df, table, version, description )
@@ -75,11 +76,14 @@ def etl_mergetablesRF(request):
     ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
     PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
     STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
+    LOC=redefineDFTypes(ADR_LOCATION.pdobjects.all().to_dataframe())
        
-    df=mergeTables(ADR,PRG,STU)
+    ADR1,PRG1,STU1=UpdateMissingValues(ADR,PRG,STU,LOC )
+    df=mergeTables(ADR1,PRG1,STU1)
+    print(df)
     numberlines = df.ID_ANO.count()
     table = mergedTables.objects
-    writeDF2Table(df, table, version, description )
+    #writeDF2Table(df, table, version, description )
 
     df=showMissingValues( mergedTables.pdobjects.filter(idCSV=version).to_dataframe() )
     context={'MERGEDTABLES' :df.to_dict('split') ,

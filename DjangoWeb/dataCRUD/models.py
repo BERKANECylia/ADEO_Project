@@ -71,4 +71,15 @@ class mergedTables(models.Model):
     class Meta:
         db_table = 'mergedtables'
 
-# Create your models here.
+class ADR_LOCATION(models.Model):
+    CODE_POSTAL     =models.CharField(max_length=120)
+    VILLE           =models.CharField(max_length=120)
+    PAYS            =models.CharField(max_length=120)
+    LAT             =models.CharField(max_length=120)
+    LON             =models.CharField(max_length=120)
+    idCSV        =models.IntegerField()
+    objects = models.Manager()
+    pdobjects = DataFrameManager()
+
+    class Meta:
+        db_table='ADR_LOCATION'

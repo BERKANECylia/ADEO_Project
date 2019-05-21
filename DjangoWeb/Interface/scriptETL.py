@@ -1,5 +1,9 @@
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import preprocessing
+from sklearn.preprocessing import LabelEncoder
+from math import radians, cos, sin, asin, sqrt
 
 def showMissingValues(df):
     df[df == ""] = np.nan
@@ -34,10 +38,15 @@ def return_distinct_year(df):
 def redefineDFTypes(df):
     for column in df:
         if column in ['ID_ANO']:
-            df[column]= df[column].astype(str).astype(np.int64)
+            df[column]=pd.to_numeric(df[column], errors='coerce')
+            #df[column]= df[column].astype(str).astype(np.int64)
         if column in ['PRG','ANNE_SCOLAIRE','ANNEE_SCOLAIRE']:
             df[column]= df[column].astype(str)
-    # print(df.dtypes)
+        if column in ['REMUNERATION']:
+            df[column]=pd.to_numeric(df[column], errors='coerce')
+            # df[df[column] == ""] = "0"
+            # df[column]= df[column].astype(np.float64)
+            # df[df[column] == 0] = np.nan
     return(df)
 
 def mergeTables(ADR,PRG,STU):
@@ -51,8 +60,13 @@ def mergeTables(ADR,PRG,STU):
     return(df)
 
 def deleteMissingValues(df):
-    df[df == ""] = np.nan
-    df=df.dropna()      
+    #print(df[pd.notnull(df['REMUNERATION'])])
+    df=df[pd.notnull(df['REMUNERATION'])]
+    df=df[pd.notnull(df['PRG'])]  
+    df=df[pd.notnull(df['ANNEE_SCOLAIRE'])]  
+    df=df[pd.notnull(df['CODE_POSTAL'])]  
+    df=df[pd.notnull(df['ADR_CP'])]  
+    df=df[pd.notnull(df['ADR_VILLE'])] 
     return(df)
 
 def writeDF2Table(df, table, version, description):
@@ -91,3 +105,90 @@ def writeDF2Table(df, table, version, description):
     b=table.count()
     print(a,b,a-b)
     return(b-a)
+
+
+# If User choose to update lines using algorithms
+# By order 'PRG_STUDENT_SITE', 'ADR_STUDENTS', 'STUDENT_INTERNSHIP', 'df_location'
+def UpdateMissingValues(ADR,PRG,STU,df_location):
+    
+    #updating missing values in ANNEE in table STU
+    df=STU[STU['ANNEE'].isnull().T]
+    for i in (df.index):
+        df1=PRG[ PRG['ID_ANO']==STU.loc[i,'ID_ANO'] ]
+        df2=df1[ df1['ANNEE_SCOLAIRE']==STU.loc[i,'ANNEE_SCOLAIRE'] ]
+        STU.loc[i,'ANNEE']=df2['PRG'].values
+    
+    #updating missing values in ANNEE_SCOLAIRE in table STU
+    df=STU[STU['ANNEE_SCOLAIRE'].isnull().T]
+    for i in (df.index):
+        df1=PRG[PRG['ID_ANO']==STU.loc[i,'ID_ANO']]
+        df2=df1[df1['PRG']==STU.loc[i,'ANNEE']]
+        STU.loc[i,'ANNEE_SCOLAIRE']=df2['ANNEE_SCOLAIRE'].values
+    
+    #updating missing values in CODE_POSTAL in table STU by the table df_location 
+    df=STU[STU['CODE_POSTAL'].isnull().T]
+    for i in (df.index):
+        if df.loc[i,'VILLE']=='NaN':
+            continue
+        else:
+            for j in (df_location.index):
+                if df_location.loc[j,'VILLE']==STU.loc[i,'VILLE']:
+                    STU.loc[i,'CODE_POSTAL']=df_location.loc[j,'CODE_POSTAL']
+                    break
+                    
+    #updating missing values in VILLE in table STU by the table df_location
+    df=STU[STU['VILLE'].isnull().T]
+    for i in (df.index):
+        if df.loc[i,'CODE_POSTAL']=='NaN':
+            continue
+        else:
+            for j in (df_location.index):
+                if df_location.loc[j,'CODE_POSTAL']==STU.loc[i,'CODE_POSTAL']:
+                    STU.loc[i,'VILLE']=df_location.loc[j,'VILLE']
+                    break
+    
+    #updating missing values in REMUNERATION in table STU
+    re_df = STU[['REMUNERATION', 'ANNEE', 'ANNEE_SCOLAIRE', 'ENTREPRISE', 'PAYS']]
+    le = preprocessing.LabelEncoder()
+    cols=['ANNEE','ANNEE_SCOLAIRE', 'ENTREPRISE', 'PAYS']
+    for col in cols:
+        le.fit(re_df[col])
+        re_df[col]=le.transform(re_df[col])
+    known_re = re_df[re_df.REMUNERATION.notnull()].values
+    unknown_re = re_df[re_df.REMUNERATION.isnull()].values
+    # Target remuneration
+    y = known_re[:, 0]
+    # features
+    X = known_re[:, 1:]
+    # fit in RandomForestRegressor
+    rfr = RandomForestRegressor(random_state=0, n_estimators=2000, n_jobs=-1)
+    rfr.fit(X, y)
+    # estimiation
+    predictedRes = rfr.predict(unknown_re[:, 1:])
+    # update
+    STU.loc[ (STU.REMUNERATION.isnull()), 'REMUNERATION' ] = predictedRes 
+ 
+ 
+     #updating missing values in ADR_CP in table ADR by df_location
+    df=ADR[ADR['ADR_CP'].isnull().T]
+    for i in (df.index):
+        if df.loc[i,'ADR_VILLE']=='NaN':
+            continue
+        else:
+            for j in (df_location.index):
+                if df_location.loc[j,'VILLE']==ADR.loc[i,'ADR_VILLE']:
+                    ADR.loc[i,'ADR_CP']=df_location.loc[j,'CODE_POSTAL']
+                    break
+                    
+    #updating missing values in VILLE in table ADR by df_location
+    df=ADR[ADR['ADR_VILLE'].isnull().T]
+    for i in (df.index):
+        if df.loc[i,'ADR_CP']=='NaN':
+            continue
+        else:
+            for j in (df_location.index):
+                if df_location.loc[j,'CODE_POSTAL']==ADR.loc[i,'ADR_CP']:
+                    ADR.loc[i,'ADR_VILLE']=df_location.loc[j,'VILLE']
+                    break
+ 
+    return ADR,PRG,STU

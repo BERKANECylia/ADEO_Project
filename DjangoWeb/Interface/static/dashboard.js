@@ -6,7 +6,7 @@
   feather.replace()
 
   // Graphs
-  var ctx = document.getElementById('myChart')
+  var ctx = document.getElementById('000myChart')
   // eslint-disable-next-line no-unused-vars
   var myChart = new Chart(ctx, {
     type: 'line',
