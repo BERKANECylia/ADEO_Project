@@ -45,10 +45,14 @@ function setchart() {
     var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels:[13,42,552,2,63,83,3,84,4] ,
+                labels:[ 
+                {% for year in STUyear %}
+                  {{ year }},
+                {% endfor %}                  
+                  ] ,
                 datasets: [{
                     label: '# of students',
-                    data: [13,42,552,2,63,83,3,84,4],
+                    data: {{ DATAGRAPH }},
             backgroundColor: prgcolorset ,
             borderColor: prgcolorborderset,
             borderWidth: 1
@@ -208,7 +212,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #d39e00;" >
-                    99320
+                    {{ NUMBERLINES }}
                 </div>
               </div>
             </div>
@@ -235,7 +239,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #c82333;" >
-                  12344
+                  {{ NUMBERSTU }}
                 </div>
               </div>
             </div>
@@ -262,7 +266,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #34ce57;">
-                  12345
+                  {{ NUMENT }}
                 </div>
               </div>
             </div>

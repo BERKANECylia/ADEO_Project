@@ -22,17 +22,20 @@ def home(request):
 
 @login_required
 def descriptiveStats(request):
-    # https://simpleisbetterthancomplex.com/tutorial/2016/12/06/how-to-create-group-by-queries.html
-            #     City.objects.values('country__name') \
-            # .annotate(country_population=Sum('population')) \
-            # .order_by('-country_population')
-
     query_results=mergedTables.objects.all()
+    df=mergedTables.pdobjects.all().to_dataframe()
     qs=mergedTables.objects.all().count()
-    #DsSTU=11000  #return_distinct_version(mergedTables.pdobjects.all().to_dataframe())
+    numSTU=mergedTables.objects.values('ID_ANO').distinct().count()
+    numENT=mergedTables.objects.values('ENTREPRISE').distinct().count()
+    STUyear=return_distinct_year(df)
+    # STUQtdPerYear=return_distinct_STUQtdPerYear(df)
+    dataGraph=[1000,10,552,2,63,830,10,84,400]
     context={'query_results':query_results,
-             'NUMBERLINES':qs
-             #'DistinctStudent':DsSTU
+             'NUMBERLINES':qs,
+             'NUMBERSTU':numSTU,
+             'NUMENT':numENT,
+             'STUyear':STUyear, 
+             'DATAGRAPH':dataGraph
                 }
     return render(request, 'descriptiveStats2.html', context)
 
