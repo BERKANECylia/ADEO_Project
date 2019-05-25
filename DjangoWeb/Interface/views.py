@@ -44,15 +44,31 @@ def descriptiveStats(request):
 @user_passes_test(lambda u: u.is_superuser)
 def etl(request):
     df_list_versions=return_distinct_version(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
-    df1_new=showMissingValues( ADR_STUDENTS.pdobjects.all().to_dataframe() )
-    df2_new=showMissingValues( STUDENT_INTERNSHIP.pdobjects.all().to_dataframe() )
+    max_version=max(df_list_versions)
+    PRG= PRG_STUDENT_SITE.pdobjects.all().to_dataframe()
+    ADR= ADR_STUDENTS.pdobjects.all().to_dataframe()
+    STU= STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
 
+    version_filtered= request.GET.get('version')
+
+    if version_filtered:
+        PRG=PRG [PRG['idCSV']==version_filtered ]
+        ADR=ADR [ADR['idCSV']==version_filtered ]
+        STU=STU [STU['idCSV']==version_filtered ]
+    else :
+        PRG=PRG [PRG['idCSV']==max_version ]
+        ADR=ADR [ADR['idCSV']==max_version ]
+        STU=STU [STU['idCSV']==max_version ]
+
+    PRGMissing=showMissingValues( PRG )
+    ADRMissing=showMissingValues( ADR )
+    STUMissing=showMissingValues( STU )
 
     context={'LIST_VERSIONS': df_list_versions,
-             'PRG_STUDENT_SITE':df_new.to_dict('split'),
-             'ADR_STUDENTS':df1_new.to_dict('split'),
-             'STUDENT_INTERNSHIP':df2_new.to_dict('split')
+             'MAX_VERSION':max_version,
+             'PRG_STUDENT_SITE':PRGMissing.to_dict('split'),
+             'ADR_STUDENTS':ADRMissing.to_dict('split'),
+             'STUDENT_INTERNSHIP':STUMissing.to_dict('split')
             }
     
     return render(request, 'etl.html', context)

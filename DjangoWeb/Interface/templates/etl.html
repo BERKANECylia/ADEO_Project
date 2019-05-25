@@ -16,7 +16,8 @@
           </select> -->
 
         <label  for="inputState" class="mdb-main-label">Select RAW DATA Version:</label>
-        <select id="inputState" class="mdb-select md-form colorful-select dropdown-dark">
+        <select id="inputState" class="mdb-select md-form colorful-select dropdown-dark" name="version">
+          <option selected>{{ MAX_VERSION }}</option>
           {% for item in LIST_VERSIONS %}
           <option>{{ item }}</option>
           {% endfor %}
