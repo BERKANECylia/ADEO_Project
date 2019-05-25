@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<form method="GET">
+<form method="GET" action="{% url 'filter_chart' %}">
     <h8><strong> Feel free to choose any option and if a option doesn't interest you, leave it as it is </strong></h8>
       <div class="container mt-5">
         <div class="form-row">
