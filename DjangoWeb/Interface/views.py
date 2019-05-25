@@ -27,21 +27,26 @@ def descriptiveStats(request):
             # .annotate(country_population=Sum('population')) \
             # .order_by('-country_population')
 
-    query_results=mergedTables.objects.all().filter()
-    # .count()
-    context={'query_results':query_results}
+    query_results=mergedTables.objects.all()
+    qs=mergedTables.objects.all().count()
+    #DsSTU=11000  #return_distinct_version(mergedTables.pdobjects.all().to_dataframe())
+    context={'query_results':query_results,
+             'NUMBERLINES':qs
+             #'DistinctStudent':DsSTU
+                }
     return render(request, 'descriptiveStats2.html', context)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def etl(request):
+    df_list_versions=return_distinct_version(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
     df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
-
     df1_new=showMissingValues( ADR_STUDENTS.pdobjects.all().to_dataframe() )
-
     df2_new=showMissingValues( STUDENT_INTERNSHIP.pdobjects.all().to_dataframe() )
 
-    context={'PRG_STUDENT_SITE':df_new.to_dict('split'),
+
+    context={'LIST_VERSIONS': df_list_versions,
+             'PRG_STUDENT_SITE':df_new.to_dict('split'),
              'ADR_STUDENTS':df1_new.to_dict('split'),
              'STUDENT_INTERNSHIP':df2_new.to_dict('split')
             }

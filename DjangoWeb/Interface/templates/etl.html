@@ -7,14 +7,23 @@
       <h1 class="h2">ETL</h1>
 
       <div class="btn-toolbar mb-2 mb-md-0">
-        <label class="mdb-main-label">Select File Version:</label>
-        <select class="mdb-select md-form colorful-select dropdown-dark">
-          <option value="1">V1 - 31/01/2017</option>
-          <option value="2">V2 - 31/01/2017</option>
-          <option value="3">V3 - 31/01/2017</option>
+          <!-- <label for="inputState">Select RAW DATA Version:</label>
+          <select id="inputState" class="form-control" name="version">
+            <option selected>Choose...</option>
+              {% for item in LIST_VERSIONS %}
+                <option>{{ item }}</option>
+              {% endfor %}
+          </select> -->
+
+        <label  for="inputState" class="mdb-main-label">Select RAW DATA Version:</label>
+        <select id="inputState" class="mdb-select md-form colorful-select dropdown-dark">
+          {% for item in LIST_VERSIONS %}
+          <option>{{ item }}</option>
+          {% endfor %}
         </select>
         <div class="btn-group mr-2">
-          <button type="button" class="btn btn-sm btn-outline-primary">Apply</button>
+          <!-- <button type="submit" class="btn btn-primary"> Apply </button> -->
+          <button type="submit" class="btn btn-sm btn-outline-primary">Apply</button>
         </div>
       </div>
       
