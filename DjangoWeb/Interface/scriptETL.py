@@ -35,6 +35,10 @@ def return_distinct_year(df):
     df_year_uniq = df['ANNEE_SCOLAIRE'].str[:4].unique().tolist()
     return (df_year_uniq)
 
+def return_distinct_version(df):
+    df_uniq=df['idCSV'].unique().tolist()     
+    return(df_uniq)
+
 def redefineDFTypes(df):
     for column in df:
         if column in ['ID_ANO']:
