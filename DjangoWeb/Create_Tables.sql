@@ -24,7 +24,7 @@
 --     ENTREPRISE , CODE_POSTAL , VILLE  ,
 --     PAYS , SUJET , REMUNERATION, 1
     
---     FROM mergedtables_OLD;
+--     FROM mergedtables;
 
     /* SELECT COUNT(*) FROM mergedtables; */
 
@@ -73,8 +73,8 @@
 --     SELECT 
 --     ANNEE  ,    ANNEE_SCOLAIRE  ,    ENTREPRISE  ,    CODE_POSTAL  ,
 --     VILLE  ,    PAYS  ,    SUJET  ,    REMUNERATION  ,    ID_ANO  ,
---     1
---     FROM "student_inter_temp" ;
+--     3
+--     FROM "STUDENT_INTERNSHIP" ;
 
 -- DROP TABLE ADR_LOCATION;
 
@@ -93,3 +93,36 @@
 -- SELECT CODE_POSTAL, 1, LAT, LON, PAYS, VILLE
 --    FROM temp_LOCATION;
   
+
+-- INSERT INTO
+--   "PRG_STUDENT_SITE" (ANNE_SCOLAIRE, id, ID_ANO, idCSV, PRG, SITE)
+-- SELECT
+--   ANNE_SCOLAIRE, id, ID_ANO, 3, PRG, SITE
+--   FROM  "PRG_STUDENT_SITE";
+
+-- SELECT DISTINCT idCSV from "PRG_STUDENT_SITE";
+-- SELECT DISTINCT idCSV from ADR_STUDENTS;
+-- SELECT DISTINCT idCSV from "STUDENT_INTERNSHIP";
+
+-- INSERT INTO
+--   "ADR_STUDENTS" (ADR_CP, ADR_PAYS, ADR_VILLE, ID_ANO, idCSV)
+-- SELECT
+--   ADR_CP, ADR_PAYS, ADR_VILLE, ID_ANO, 1
+--   FROM ADR_STUDENTS;
+
+-- CREATE TABLE "PRG_STUDENT_SITE"(
+--     id integer primary key autoincrement,
+--     ANNE_SCOLAIRE TEXT,
+--     ID_ANO TEXT,
+--     PRG TEXT,
+--     SITE TEXT,
+--     idCSV int
+--   );
+
+-- INSERT INTO
+--   "PRG_STUDENT_SITE" (ANNE_SCOLAIRE, ID_ANO, idCSV, PRG, SITE)
+-- SELECT 
+--    ANNE_SCOLAIRE, ID_ANO, idCSV, PRG, SITE
+-- FROM PRG_STUDENT_SITE2;
+
+-- DROP TABLE PRG_STUDENT_SITE2;
