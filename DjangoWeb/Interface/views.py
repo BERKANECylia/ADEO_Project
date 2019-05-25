@@ -39,6 +39,7 @@ def descriptiveStats(request):
                 }
     return render(request, 'descriptiveStats2.html', context)
 
+
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def etl(request):
@@ -100,7 +101,6 @@ def etl_mergetablesRF(request):
             }
     return render(request, 'etl_mergedtables.html', context)
 
-
 @login_required
 def maps(request):
     return render(request, 'maps.html')
@@ -156,28 +156,26 @@ def checking(request):
 
     # .count()
     #context = {'query_results': query_results}
-    query_results=mergedTables.objects.all()
-
+    query_results=mergedTables.objects.all()                        # gets all objects of the mergedTables
+    ### below 5 variables gets the unique fields from each of their mentioned fields
     df_new_prg = return_distinct_prg(mergedTables.pdobjects.all().to_dataframe())
     df_new_ville = return_distinct_ville(mergedTables.pdobjects.all().to_dataframe())
     df_new_cp = return_distinct_cp(mergedTables.pdobjects.all().to_dataframe())
     df_new_rem = return_distinct_rem(mergedTables.pdobjects.all().to_dataframe())
     df_new_year= return_distinct_year(mergedTables.pdobjects.all().to_dataframe())
+    qs= query_results                       ## first when the page loads, all these are sent to the html and are rendered
 
-
+    ## this below code works only if the form is sending somedata via Get method..i.e if the user presses search button
     prg_filtered= request.GET.get('program')
-    #print(prg_filtered)
     vil_filtered= request.GET.get('ville')
-    #print(vil_filtered)
     cod_filtered= request.GET.get('code_postal')
     rem_filtered= request.GET.get('remuneration')
-    #print(rem_filtered)
     yfr_filtered=request.GET.get('years_from')
-    #print(yfr_filtered)
     yto_filtered=request.GET.get('years_to')
-    qs= query_results
+    
     message=''
-
+    ## the first if contions filters and stores things in qs, the 2nd if condition if is true further acts 
+    ## on this result stored in qs by 1st if conditon(which means it is further filtering on the data its getting from previous if result,)
     if is_valid_queryparam(prg_filtered):
         qs=qs.filter(PRG=prg_filtered)
         #qs= qs & query_results.filter(ADR_VILLE='CERGY' )
@@ -185,14 +183,15 @@ def checking(request):
         #print(prg_filtered)
 
     if is_valid_queryparam(vil_filtered):
-        qs=qs.filter(ADR_VILLE=vil_filtered)
-        print(qs)
+        qs=qs.filter(ADR_VILLE=vil_filtered)     
+       # print(qs)
 
     if is_valid_queryparam(cod_filtered):
         qs=qs.filter(ADR_CP=cod_filtered)
 
     if is_valid_queryparam(rem_filtered):
         qs=qs.filter(REMUNERATION=rem_filtered)
+       # print(type(qs))   ## class 'django.db.models.query.QuerySet'
 
     elif is_valid_queryparam2(yfr_filtered,yto_filtered):
         if (yfr_filtered <= yto_filtered):
@@ -206,14 +205,16 @@ def checking(request):
             yto_anotherhalf = (str)(yto_anotherhalf)
             yfr_filtered=yfr_filtered + '/' + (yfr_anotherhalf)
             yto_filtered=yto_filtered + '/' + (yto_anotherhalf)
-            print('\n')
-            print('helllooooooo')
-            print(yfr_filtered)
+           # print('\n')
+           # print('helllooooooo')
+           # print(yfr_filtered)
             qs=query_results.filter(ANNEE_SCOLAIRE__gte=yfr_filtered,ANNEE_SCOLAIRE__lte=yto_filtered)
+           # print('\n')
+           # print(qs)
+            
         else:
             message="Years From-To not correct"
 
-    #qs = query_results
 
     context = {'prg': df_new_prg,
                'ville': df_new_ville,
@@ -223,7 +224,6 @@ def checking(request):
                'message':message,
                'query_results':qs,
                }
-
-
+    
     return render(request,'checking.html',context)
     #return HttpResponse('<h1> hi </h1>')
