@@ -1,0 +1,28 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--{{ form.as_p }}-->
+
+    <p>{{ form.fileFormat.label_tag }} {{  form.fileFormat }}</p>
+
+    <p>{{ form.selectedtable.label_tag }} {{ form.selectedtable }} </p>
+   <!-- {{ form.separator }}-->
+    {{ form.document }}
+
+
+    <button type="submit">Upload</button>
+  </form>
+
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}/> 
+    {% endfor %}
+</ul>
+{% endif %}
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
