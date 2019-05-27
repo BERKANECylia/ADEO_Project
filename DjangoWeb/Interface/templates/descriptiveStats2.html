@@ -45,17 +45,17 @@ function setchart() {
     var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels:[ 
+                labels:[
                 {% for year in STUyear %}
                   {{ year }},
-                {% endfor %}                  
+                {% endfor %}
                   ] ,
                 datasets: [{
                     label: '# of students',
                     data: {{ DATAGRAPH }},
-            backgroundColor: prgcolorset ,
-            borderColor: prgcolorborderset,
-            borderWidth: 1
+            backgroundColor: '#9ccc65' ,
+            borderColor: '#33691e',
+            borderWidth: 3
         }]
     },
     options: {
@@ -88,19 +88,16 @@ function piechart() {
     var pieChart = new Chart(ctx, {
     type: 'doughnut',
     data:{
-                labels: [1,2],
-                datasets: [{
+        labels: ['Cergy','Pau'],
+        datasets: [{
                     label: '% of students',
-                    data: [50,80],
-            backgroundColor: prgcolorset,
-            borderColor: prgcolorborderset,
-            borderWidth: 1,
+                    data: {{ D_stddist }},
+            backgroundColor: ['#ffee58','#ffa726'],
+            borderColor: '#33691e',
+            borderWidth: 3,
         }]
     },
     options: {
-
-
-
         title: {
             display: false,
             text: 'Students in Campus'
@@ -109,10 +106,13 @@ function piechart() {
             display:true,
             position:'bottom',
         },
-
-
-
-
+    },
+    plugins:{
+        labels: {
+            render: 'percentage',
+            fontColor: ['green', 'white'],
+            precision: 2
+            }
     }
 });
 }
@@ -121,38 +121,48 @@ function setchart2() {
     ctx.shadowBlur=20;
     ctx.shadowColor="black";
     var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels:[1,2,2,2,3,3,3,4,4] ,
-                datasets: [{
-                    label: '# of students',
-                    data: [13,42,552,2,63,83,3,84,4],
-            backgroundColor: prgcolorset ,
-            borderColor: prgcolorborderset,
-            borderWidth: 1
-        }]
+    type: 'bar',
+    data: {
+      labels: ['ADEO1', 'ADEO2' ,'CPI1' ,'CPI2', 'ING1' ,'ING2' ,'ING3' ,'MobM2' ,'QFRM1' ,'QFRM2'], <!--put the prg-->
+      datasets: [{
+          label: "Cergy(Amount of students)",
+          type: "line",
+          borderColor: '#26c6da',
+          data: {{ D_cergyc }},
+          fill: false
+        },
+          {
+          label: "Pau(Amount of students)",
+          type: "line",
+          borderColor: '#5c6bc0',
+          data: {{ D_pauc }},
+          fill: false
+        },
+          {
+          label: "Cergy(Mean salary)",
+          type: "bar",
+          backgroundColor: '#ffe082',
+          data: {{ D_cergys }},
+        }, {
+          label: "Pau(Mean salary)",
+          type: "bar",
+          backgroundColor: '#bf360c',
+          backgroundColorHover: '#ffab91',
+          data:{{ D_paus }},
+        }
+
+      ]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-
-        title: {
-            display: false,
-            text: 'Department versus Salary'
-        },
-
-        legend: {
-            display: true,
-            position:'bottom',
-        },
-        tooltips: {
-            mode: 'x'
-        }
+      title: {
+        display: false,
+        text: 'Population growth (millions): Europe & Africa'
+      },
+      legend: { display: true ,
+                position:'bottom'},
+      plugins: {
+          labels: false
+      }
     }
 });
 
@@ -192,7 +202,7 @@ function setchart2() {
 </div>
 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 
-<div class="row" >
+<div class="row" style="margin-left: 20px; margin-right: 20px">
           <div class="col-lg-3 col-md-5 col-sm-5 " >
             <div class="card card-stats" >
               <div class="card-body" >
@@ -212,7 +222,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #d39e00;" >
-                    {{ NUMBERLINES }}
+                    {{ num_records }}
                 </div>
               </div>
             </div>
@@ -239,7 +249,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #c82333;" >
-                  {{ NUMBERSTU }}
+                  {{ num_std }}
                 </div>
               </div>
             </div>
@@ -266,7 +276,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #34ce57;">
-                  {{ NUMENT }}
+                  {{ num_entre }}
                 </div>
               </div>
             </div>
@@ -291,7 +301,7 @@ function setchart2() {
               <div class="card-footer ">
                 <hr>
                 <div class="stats" style="color: #00bbff;">
-                  12344
+                  {{ Mean_sal }}
                 </div>
               </div>
 
@@ -301,32 +311,36 @@ function setchart2() {
 </div>
 <div class="row">
     <div class="col-lg-4  text-center" >
-            <div class="card-chart ">
-              <div class="card-header ">
-                <h5 class="card-title">Students Distribution</h5>
-                <p class="card-category">In Campus</p>
+            <div class="card-chart " style="border-width:3px;margin-top: 0px;" >
+              <div class="card-header " >
+                <h5 class="card-title" style="text-align: center;padding-top: 0px;">Students Distribution</h5>
+                <p class="card-category" style="text-align: center">In Campus</p>
               </div>
-               <div class="inside-left">
-                    <canvas class="my-4 w-10" id="piechart" width="100%" height="70"></canvas>
-                 </div>
-              </div>
+               <div class="card-body">
+                    <canvas class="my-4 w-10" id="piechart" width="100%" height="75"></canvas>
+               </div>
             </div>
+    </div>
 
 
     <div class="col-lg-8 " >
-        <div class="card-chart flex-column">
-              <div class="card-header ">
-                <h5 class="card-title">Salary and amount of students </h5>
-                 <p class="card-category">per departments</p>
-                <div class="inside">
-                    <canvas class="my-4 w-10" id="myChart2" width="100%" height="30"  ></canvas>
-                </div>
+        <div class="card-chart " >
+              <div class="card-header " >
+                <h5 class="card-title text-center">Salary and amount of students </h5>
+                 <p class="card-category text-center">per departments</p>
+              </div>
+              <div class="card-body">
+                  <canvas class="my-4 w-10" id="myChart2" width="100%" height="30"  ></canvas>
               </div>
         </div>
-        <div class="card-chart flex-column">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 text-center" style="margin-left:150px; padding-left: 50px" >
+        <div class="card-chart " style="margin-top: 1px;">
               <div class="card-header ">
-                <h5 class="card-title">Students per year</h5>
-                  <p class="card-category">From 2014 til last year</p>
+                <h5 class="card-title text-center">Students per year</h5>
+                  <p class="card-category text-center">From 2014 til last year</p>
                   <div class="inside">
                     <canvas class="my-4 w-10" id="myChart" width="100%" height="25" ></canvas>
                 </div>
@@ -350,7 +364,7 @@ function setchart2() {
           </tr>
         </thead>
         <tbody>
-          
+
             {% for item in query_results %}
             <tr>
                 <td>{{ item.ID_ANO }}</td>

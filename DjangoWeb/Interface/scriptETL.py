@@ -196,3 +196,94 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
+
+
+#num of records
+def num_records1(df):
+    return(len(df.index))
+
+#num of students
+def num_std1(df):
+    return(len(df['ID_ANO'].unique()))
+#num of enterprise
+def num_entre1(df):
+    return (len(df['ENTREPRISE'].unique()))
+#mean of salary
+def mean_sal1(df):
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'], errors='coerce')
+    meansal = df['REMUNERATION'].mean()
+    meansal = "{:5.2f}".format(meansal)
+    return(meansal)
+
+
+
+def stddist(df,cat):
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    le = np.array(le.classes_)
+    col=[]
+    for i in le:
+        df2=df[df['SITE']==i]
+        col.append(len(df2['ID_ANO'].unique()))
+    return(col,le)
+
+#std_number
+def count_std(df,cat):
+    ct=df.groupby(['SITE','PRG']).count()
+    ind=ct.index
+    ind = np.array(ind.codes)
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng=len(le.classes_)
+    le = np.array(le.classes_)
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                cergy[ind[1][count]]=ct['ID_ANO'][count]
+
+        else:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                pau[ind[1][count]]=ct['ID_ANO'][count]
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+    return(cergy,pau,le)
+
+def salary_avg(df,cat):
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng = len(le.classes_)
+    le = np.array(le.classes_)
+
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'],errors='coerce')
+    mean=df.groupby(['SITE','PRG']).mean()
+    ind=mean.index
+    ind = np.array(ind.codes)
+
+
+
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                cergy[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+
+
+        else:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                pau[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+
+    return(cergy,pau,le)
