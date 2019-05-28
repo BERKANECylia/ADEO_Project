@@ -2,14 +2,14 @@
 {% load static %} 
 {% static "indu.csv" %}
 <!--https://stackoverflow.com/questions/54960091/loading-a-csv-file-in-d3-js-inside-django-is-not-working -->
+
+
+
 <script>
 {% block jquery %}
 $.ajax({
     success: function(data) {
         setchart()
-        piechart()
-        setchart2()
-        piechart2()
     },
     error: function(error_data){
         console.log("error")
@@ -46,17 +46,17 @@ function setchart() {
     var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels:[ 
+                labels:[
                 {% for year in STUyear %}
                   {{ year }},
-                {% endfor %}                  
+                {% endfor %}
                   ] ,
                 datasets: [{
                     label: '# of students',
                     data: {{ DATAGRAPH }},
-            backgroundColor: prgcolorset ,
-            borderColor: prgcolorborderset,
-            borderWidth: 1
+            backgroundColor: '#9ccc65' ,
+            borderColor: '#33691e',
+            borderWidth: 3
         }]
     },
     options: {
@@ -99,6 +99,9 @@ function piechart() {
         }]
     },
     options: {
+
+
+
         title: {
             display: false,
             text: 'Students in Campus'
@@ -199,6 +202,39 @@ function piechart2() {
             fontColor: ['green', 'white'],
             precision: 2
             }
+        },
+          {
+          label: "Pau(Amount of students)",
+          type: "line",
+          borderColor: '#5c6bc0',
+          data: {{ D_pauc }},
+          fill: false
+        },
+          {
+          label: "Cergy(Mean salary)",
+          type: "bar",
+          backgroundColor: '#ffe082',
+          data: {{ D_cergys }},
+        }, {
+          label: "Pau(Mean salary)",
+          type: "bar",
+          backgroundColor: '#bf360c',
+          backgroundColorHover: '#ffab91',
+          data:{{ D_paus }},
+        }
+
+      ]
+    },
+    options: {
+      title: {
+        display: false,
+        text: 'Population growth (millions): Europe & Africa'
+      },
+      legend: { display: true ,
+                position:'bottom'},
+      plugins: {
+          labels: false
+      }
     }
 });
 }
@@ -245,7 +281,7 @@ var svg = d3.select("#my_dataviz")
     .select(".domain").remove()
 
   // Build color scale
-  
+  // https://bl.ocks.org/d3indepth/89ced137bece23b908cf51580d5e082d 
    var myColor = d3.scaleSequential().domain([0, 1]).interpolator(d3.interpolateWarm)
   //var myColor = d3.scaleLinear().range(["red", "#69b3a2"]).domain([-1,1])
    // var myColor = d3.scaleLinear().range(['Blue', '#69b3a2']).domain([-1,1]);
@@ -300,13 +336,6 @@ var svg = d3.select("#my_dataviz")
     .on("mouseleave", mouseleave)
 })
 
-// Add title to graph
-svg.append("text")
-        .attr("x", 0)
-        .attr("y", -50)
-        .attr("text-anchor", "left")
-        .style("font-size", "22px")
-        .text("A d3.js heatmap");
 
 // Add subtitle to graph
 svg.append("text")
@@ -317,18 +346,18 @@ svg.append("text")
         .style("fill", "grey")
         .style("max-width", 400)
         .text("A short description of the take-away message of this chart.");
-
-
-
 {% endblock %}
 </script>
+
+
+
 
 
 
 {% block content %}
 
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Dashboard</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
@@ -407,7 +436,6 @@ svg.append("text")
                 <div class="row">
                   <div class="col-5 col-md-4">
 
-                      <img  src="\static\images\enterprise.png" height="40">
 
                   </div>
                   <div class="col-7 col-md-8">
@@ -491,47 +519,17 @@ svg.append("text")
         </div>
 
         <div id="my_dataviz"></div>
-        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
     </div>
 </div>
 
-<!--
-    <h2>Program Data</h2>
-    <div class="table-responsive">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
+    
 
-              <!-- <th>#</th> -->
-<!--            <th>ID_ANO</th>
-              <th>PRG</th>
-              <th>PAYS</th>
-              <th>SITE</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-            {% for item in query_results %}
-            <tr>
-                <td>{{ item.ID_ANO }}</td>
-                <td>{{ item.PRG }}</td>
-                <td>{{ item.PRG }}</td>
-                <td>{{ item.SITE }}</td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-      </table>
-    </div>
--->
+    
  <!--   Core JS Files   -->
-  <scripst src="../static/assets/js/core/jquery.min.js"></script>
-  <scripst src="../static/assets/js/core/popper.min.js"></script>
-  <scripst src="../static/assets/js/core/bootstrap.min.js"></script>
-  <scripst src="../static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  
-  <scripst src="htdtps://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <scripst src="https://d3js.org/d3.v4.js"></script> 
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="../static/assets/js/core/jquery.min.js"></script>
+  <script src="../static/assets/js/core/popper.min.js"></script>
+  <script src="../static/assets/js/core/bootstrap.min.js"></script>
+  <script src="../static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
 {% endblock %}

@@ -9,9 +9,11 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
 #from app import forms, views
-from PRG_STUDENT_SITE.views import PRG_STUDENT_SITE_View
+from dataCRUD.views import PRG_STUDENT_SITE_View
 from Interface import views
 from UploadingFile.views import uploadCSV
+from UploadingFile.views import model_form_upload
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -41,7 +43,9 @@ urlpatterns = [
     
     path('PRGSTUDENTSITE/',PRG_STUDENT_SITE_View, name='PRGSTUDENTSITE'), # Url to programstudentsite module
     #url(r'^upload/csv/$', views.upload_csv, name='upload_csv'),
-    path('uploadcsv/',uploadCSV,name='uploadCSV'),
+    path('uploadcsv/<int: tableselected>/',uploadCSV),
+    #path('Interface/uploadcsv/form/$', model_form_upload, name='model_form_upload'),
+    url(r'^uploadcsv/form/$',model_form_upload, name='model_form_upload'),
 
    ######### edit by Indu-- 
     path('',include('homescreen.urls')),
