@@ -41,6 +41,7 @@ def descriptiveStats(request):
     c_cergy, c_pau, c_le =count_std(df,'PRG')
     s_cergy, s_pau, s_le =salary_avg(df, 'PRG')
 
+    print(d_stddist)
 
     dataGraph=[1000,10,552,2,63,830,10,84,400]
     heat_value=heatmap_ftr_slcor(df)

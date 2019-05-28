@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 
 <script>
@@ -450,44 +451,15 @@ svg.append("text")
                 </div>
             </div>
         </div>
+
+        <div id="my_dataviz"></div>
     </div>
 </div>
 
-    <h2>Program Data</h2>
-    <div class="table-responsive">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-              <!-- <th>#</th> -->
-              <th>ID_ANO</th>
-              <th>PRG</th>
-              <th>PAYS</th>
-              <th>SITE</th>
-          </tr>
-        </thead>
-        <tbody>
+    
 
-            {% for item in query_results %}
-            <tr>
-                <td>{{ item.ID_ANO }}</td>
-                <td>{{ item.PRG }}</td>
-                <td>{{ item.PRG }}</td>
-                <td>{{ item.SITE }}</td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-      </table>
-    </div>
--->
+    
  <!--   Core JS Files   -->
-  <scripst src="../static/assets/js/core/jquery.min.js"></script>
-  <scripst src="../static/assets/js/core/popper.min.js"></script>
-  <scripst src="../static/assets/js/core/bootstrap.min.js"></script>
-  <scripst src="../static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  
-  <scripst src="htdtps://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <scripst src="https://d3js.org/d3.v4.js"></script> 
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script src="../static/assets/js/core/jquery.min.js"></script>
   <script src="../static/assets/js/core/popper.min.js"></script>

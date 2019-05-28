@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 from math import radians, cos, sin, asin, sqrt
+from feature_selector import FeatureSelector
 
 def showMissingValues(df):
     df[df == ""] = np.nan
@@ -64,7 +65,6 @@ def mergeTables(ADR,PRG,STU):
     return(df)
 
 def deleteMissingValues(df):
-    #print(df[pd.notnull(df['REMUNERATION'])])
     df=df[pd.notnull(df['REMUNERATION'])]
     df=df[pd.notnull(df['PRG'])]  
     df=df[pd.notnull(df['ANNEE_SCOLAIRE'])]  
@@ -107,7 +107,6 @@ def writeDF2Table(df, table, version, description):
             idCSVDescript   =description
          )
     b=table.count()
-    print(a,b,a-b)
     return(b-a)
 
 
@@ -216,12 +215,12 @@ def heatmap_ftr_slcor(df):                    # heatlap feature selector funcito
     cor_out.drop(columns='idCSV',inplace=True)
     cor_out.drop(columns='ID_ANO',inplace=True)                               ## here i dropping unwanted columns
     cor_out.drop(columns='id',inplace=True)
-    print(cor_out.columns)
+    # print(cor_out.columns)
     new_df= pd.DataFrame(columns=['group','variable','value'])                  # new dataframe
     new_df.columns
     k=0
     li=list(cor_out.columns)
-    print(li)
+    # print(li)
     length=len(li)
     #cor_out.reset_index(inplace=True, drop=True)
     i_ind=0
@@ -236,8 +235,8 @@ def heatmap_ftr_slcor(df):                    # heatlap feature selector funcito
             new_df.loc[k,'value']=cor_out.loc[i,li[i_ind]]*10          ##### since all the values are very very less, there aren't showing significant difference in heatmap
             k=k+1                                                      ##### so just multiplied by 10 .... THIS HAS TO BE CHECKED
         i_ind=i_ind+1
-    print(new_df.head(3))
-    new_df.to_csv('H:\Documents\git\ADEO_Project\DjangoWeb\Interface\static\indu.csv',index=False)
+    # print(new_df.head(3))
+    new_df.to_csv('H:\Documents\GitHub\ADEO_Project\DjangoWeb\Interface\static\indu.csv',index=False)
     return  None
 #num of records
 def num_records1(df):
@@ -272,9 +271,7 @@ def stddist(df,cat):
 def count_std(df,cat):
     ct=df.groupby(['SITE','PRG']).count()
     ind=ct.index
-    ind = np.array(ind.labels)
-    print(ind)
-
+    ind = np.array(ind.codes)
 
     le = preprocessing.LabelEncoder()
     le.fit(df[cat][df[cat].notnull()])
@@ -307,7 +304,7 @@ def salary_avg(df,cat):
     df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'],errors='coerce')
     mean=df.groupby(['SITE','PRG']).mean()
     ind=mean.index
-    ind = np.array(ind.labels)
+    ind = np.array(ind.codes)
 
 
 
