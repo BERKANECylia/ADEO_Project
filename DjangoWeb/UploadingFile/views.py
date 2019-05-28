@@ -19,7 +19,7 @@ from .forms import DocumentForm
 
 import csv
 import codecs
-
+import ast
 def uploadCSV(request):
      #tables=models._meta.db_table
      #tables=connection.introspection.table_names()
@@ -100,35 +100,20 @@ def model_form_upload(request):
         if form.is_valid():
             ptable=form.cleaned_data.get('selectedtable')
             uploadedFile=request.FILES['document']
-
-            fileType=form.cleaned_data('fileFormat')
+            fileType=form.cleaned_data.get('fileFormat')
 
             #Process the file
             if uploadedFile.multiple_chunks():
                 messages.error(request,"Uploaded file is too big (%.2f MB)." % (myfile.size/(1000*1000),))
             
-            #handle_csv_file(uploadedFile,ptable)
-            reader = csv.DictReader(codecs.iterdecode(uploadedFile, 'utf-8'))
-            for row in reader:
-                id_ano          =row['ID_ANO']
-                prg             =row['PRG']
-                anne_scolaire   =row['ANNE_SCOLAIRE']
-                site            =row['SITE']
-                prg_student_site=PRG_STUDENT_SITE(ID_ANO=id_ano,PRG=prg,ANNE_SCOLAIRE=anne_scolaire,SITE=site)
-                try:
-                    prg_student_site.save()
-                except Exception as e:
-                    messages.error(request,"Unable to save csv data to the database. "+repr(e))   
-
-            #if uploadedFile.name.endswith(filetypeSelected):
-            #if uploadedFile.name.endswith(fileType):
-            #    handle_csv_file(uploadedFile,ptable)
-           
-            #elif uploadedFile.name.endswith(filetypeSelected):
-            #    handle_uploaded_file(uploadedFile)
-            #else:
-            #    messages.error(request,'File is not CSV & text type')
-            #    return HttpResponseRedirect(reverse('model_form_upload'))
+            if uploadedFile.name.endswith(fileType):
+                if fileType=='csv':
+                    handle_csv_file(uploadedFile,ptable)
+                if fileType=='txt':
+                    handle_uploaded_file(uploadedFile,ptable)
+            else:
+                messages.error(request,'File is not CSV & text type')
+                return HttpResponseRedirect(reverse('model_form_upload'))
 
             form.save()
             return HttpResponseRedirect(reverse('model_form_upload'))
@@ -153,56 +138,49 @@ def handle_uploaded_file(f,table):
                 messages.error(request,"Unable to upload file. "+repr(e))   
 
 def handle_csv_file(f,tablePicked):
-    reader = csv.DictReader(codecs.iterdecode(f, 'utf-8'))
-    for row in reader:
-        id_ano          =row['ID_ANO']
-        prg             =row['PRG']
-        anne_scolaire   =row['ANNE_SCOLAIRE']
-        site            =row['SITE']
-        prg_student_site=PRG_STUDENT_SITE(ID_ANO=id_ano,PRG=prg,ANNE_SCOLAIRE=anne_scolaire,SITE=site)
-        try:
-            prg_student_site.save()
-        except Exception as e:
-            messages.error(request,"Unable to save csv data to the database. "+repr(e))   
-    #if tablePicked==PRG_STUDENT_SITE:
-    #    for row in reader:
-    #        id_ano          =row['ID_ANO']
-    #        prg             =row['PRG']
-    #        anne_scolaire   =row['ANNE_SCOLAIRE']
-    #        site            =row['SITE']
-    #        prg_student_site=PRG_STUDENT_SITE(ID_ANO=id_ano,PRG=prg,ANNE_SCOLAIRE=anne_scolaire,SITE=site)
-    #        try:
-    #            prg_student_site.save()
-    #        except Exception as e:
-    #            messages.error(request,"Unable to save csv data to the database. "+repr(e))   
-    #if tablePicked==ADR_STUDENTS:
-    #    for row in reader:
-    #        adr_cp      =row['ADR_CP']
-    #        adr_ville   =row['ADR_VILLE']
-    #        adr_pays    =row['ADR_PAYS']
-    #        site        =row['SITE']
-    #        id_ano      =row['ID_ANO']
-    #        adr_student=ADR_STUDENTS(ADR_CP=adr_cp,ADR_VILLE=adr_ville,ADR_PAYS=adr_pays,SITE=site,ID_ANO=id_ano)
-    #        try:
-    #            adr_student.save()
-    #        except Exception as e:
-    #            messages.error(request,"Unable to save csv data to the database. "+repr(e)) 
-    #if tablePicked==STUDENT_INTERNSHIP:
-    #    for row in reader:
-    #        annee=row['ANNEE']
-    #        anne_scolaire=row['ANNE_SCOLAIRE']
-    #        entreprise=row['ENTREPRISE']
-    #        code_postal=row['CODE_POSTAL']
-    #        ville=row['VILLE']
-    #        pay=row['PAY']
-    #        sujet=row['SUJET']
-    #        remuneration=row['REMUNERATION']
-    #        id_ano=row['ID_ANO']
-    #        student_internship=STUDENT_INTERNSHIP(ANNEE=annee,ANNE_SCOLAIRE=anne_scolaire,ENTREPRISE=entreprise,
-    #                                              CODE_POSTAL=code_postal,VILLE=ville,PAY=pay,SUJET=sujet,
-    #                                              REMUNERATION=remuneration,ID_ANO=id_ano,SITE=site)
-    #        try:
-    #            student_internship.save()
-    #        except Exception as e:
-    #            messages.error(request,"Unable to save csv data to the database. "+repr(e)) 
+    reader = csv.DictReader(codecs.iterdecode(f, 'latin-1'))
+    #reader = csv.DictReader(codecs.iterdecode(f, 'utf-8'))
+ 
+    if tablePicked=='PRG_STUDENT_SITE':
+        for row in reader:
+            id_ano          =row['ID_ANO']
+            prg             =row['PRG']
+            anne_scolaire   =row['ANNE_SCOLAIRE']
+            site            =row['SITE']
+            prg_student_site=PRG_STUDENT_SITE(ID_ANO=id_ano,PRG=prg,ANNE_SCOLAIRE=anne_scolaire,SITE=site)
+            try:
+                prg_student_site.save()
+            except Exception as e:
+                messages.error(request,"Unable to save csv data to the database. "+repr(e))   
+    if tablePicked=='ADR_STUDENTS':
+        for row in reader:
+            adr_cp      =row['ADR_CP']
+            adr_ville   =row['ADR_VILLE']
+            adr_pays    =row['ADR_PAYS']           
+            id_ano      =row['ID_ANO']
+            adr_student =ADR_STUDENTS(ADR_CP=adr_cp,ADR_VILLE=adr_ville,ADR_PAYS=adr_pays,ID_ANO=id_ano)
+            try:
+                adr_student.save()
+            except Exception as e:
+                messages.error(request,"Unable to save csv data to the database. "+repr(e)) 
+    if tablePicked=='STUDENT_INTERNSHIP':
+        for row in reader:
+            annee=row['ANNEE']
+            annee_scolaire=row['ANNEE_SCOLAIRE'] 
+            entreprise=row['ENTREPRISE']
+            code_postal=row['CODE_POSTAL']
+            ville=row['VILLE']
+            pays=row['PAYS']
+            sujet=row['SUJET']
+            remuneration=row['REMUNERATION'].replace(',', ".")
+            #remuneration=ast.literal_eval(row['REMUNERATION'].replace(',', '.'))
+            id_ano=row['ID_ANO']
+            student_internship=STUDENT_INTERNSHIP(ANNEE=annee,ANNEE_SCOLAIRE=annee_scolaire,ENTREPRISE=entreprise,
+                                                  CODE_POSTAL=code_postal,VILLE=ville,PAYS=pays,SUJET=sujet,
+                                                  REMUNERATION=float(remuneration),ID_ANO=id_ano)
+            student_internship.save()
+            #try:
+            #    student_internship.save()
+            #except Exception as e:
+            #    messages.error(request,"Unable to save csv data to the database. "+repr(e)) 
 # Create your views here.

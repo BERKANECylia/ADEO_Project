@@ -2,19 +2,33 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!--{{ form.as_p }}-->
+      <script type="text/javascript">
+                    window.onload = function() {$("#id_separator").hide();};
+                    //$(function () { $('#id_separator').hide() });
+      </script>
 
+    {{ form.as_p }}
+
+      <script type="text/javascript">
+          $('#id_fileFormat').on('change', function ()
+          {
+                var value = $(this).val();
+                if (value == "csv") {
+                    $('#id_separator').hide();
+                }
+                else {
+                    $('#id_separator').show();
+                }
+           });
+           
+      </script>
+
+<!--
     <p>{{ form.fileFormat.label_tag }} {{  form.fileFormat }}</p>
-
-    <p>{{ form.selectedtable.label_tag }} {{ form.selectedtable }} </p>
-   <!-- {{ form.separator }}-->
-    {{ form.document }}
-
+    <p>{{ form.selectedtable.label_tag }} {{ form.selectedtable }} </p> -->
 
     <button type="submit">Upload</button>
   </form>
-
-
 
 {% if messages %}
 <ul class="messages">
