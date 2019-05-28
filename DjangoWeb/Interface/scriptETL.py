@@ -196,7 +196,6 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
-<<<<<<< HEAD
 
 
 
@@ -329,5 +328,3 @@ def salary_avg(df,cat):
         count=count+1
 
     return(cergy,pau,le)
-=======
->>>>>>> parent of f679eee... correlation Heatmap
