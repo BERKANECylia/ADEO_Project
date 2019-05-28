@@ -9,6 +9,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 #from app import forms, views
 from dataCRUD.views import PRG_STUDENT_SITE_View
+#from dataCRUD.views import ADR_STUDENTS_View
 from Interface import views
 
 from UploadingFile.views import uploadCSV
@@ -22,6 +23,7 @@ from django.contrib.auth import views as auth_views
 #from PRG_STUDENT_SITE.views import PRG_STUDENT_SITE_View
 from Interface import views
 from UploadingFile.views import uploadCSV
+from UploadingFile.views import model_form_upload
 from django.conf import settings
 from django.conf.urls.static import static
 ######
@@ -31,16 +33,11 @@ urlpatterns = [
     
     # url(r'^admin/', include(admin.site.urls)),
     path('admin/', admin.site.urls),
-
-    path('Interface/checking', views.checking, name='checking'),
-
     path('Interface/', views.home, name='home'),
     path('Interface/descriptiveStats', views.descriptiveStats, name='descriptiveStats'),
-    path('Interface/filter_chart',views.filter_chart, name='filter_chart'),
     path('Interface/maps', views.maps, name='maps'),
     path('Interface/etl', views.etl, name='etl'),
     path('Interface/etl_mergetables', views.etl_mergetables, name='etl_mergetables'),
-    path('Interface/etl_mergetablesRF', views.etl_mergetablesRF, name='etl_mergetablesRF'),
     path('Interface/contact_us',views.contact_us,name='contact_us'),
     #path('', views.home, name='home'),
     #path('contact/', views.contact, name='contact'),
@@ -59,9 +56,18 @@ urlpatterns = [
     #    name='login'),
     #path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     #path('admin/', admin.site.urls),
+    # path('Interface/dataCRUD/PRGSTUDENTSITE/',PRG_STUDENT_SITE_View, name='dataCRUD'), # Url to programstudentsite module
     path('Interface/dataCRUD/',PRG_STUDENT_SITE_View, name='dataCRUD'), # Url to programstudentsite module
+
+    #path('Interface/dataCRUD/ADRSTUDENT/',ADR_STUDENTS_View), # Url to programstudentsite module
+
     #url(r'^upload/csv/$', views.upload_csv, name='upload_csv'),
-    path('Interface/uploadcsv/',uploadCSV,name='uploadCSV'),
+    #path('Interface/uploadcsv/',uploadCSV,name='uploadCSV'),
+    #path('Interface/uploadcsv/form/$', model_form_upload, name='model_form_upload'),
+    #url(r'^uploadcsv/form/$',model_form_upload, name='model_form_upload'),
+    path('Interface/uploadcsv/', model_form_upload, name='model_form_upload'),
+
+
 
     ### 14-05-19 ### edit by Indu## 
  #   path('PRGSTUDENTSITE/',PRG_STUDENT_SITE_View, name='PRGSTUDENTSITE'), # Url to programstudentsite module

@@ -154,21 +154,19 @@
     </nav>
 
 
-
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       {% block content %}
-    <div class="offset-3 col-md-6">
-     <div class="content-section text-white mt-5 p-4" style="background:#3a414c;">
-        <h3 style= "color:white"> Fill in Your details for us to reach You </h3>
+       <div class="content-section">
+        <h1>Contact</h1>
 
         <form role="form" action="" method="post">
             {% csrf_token %}
             {{ form|crispy }}
-           <button class="btn btn-outline-info" type="submit">Send</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
-    </div>
       {% endblock %}
-
+    </main>
 
   </div>
 </div>
