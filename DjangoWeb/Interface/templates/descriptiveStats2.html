@@ -194,7 +194,7 @@ var svg = d3.select("#my_dataviz")
     .select(".domain").remove()
 
   // Build color scale
-  
+  // https://bl.ocks.org/d3indepth/89ced137bece23b908cf51580d5e082d 
    var myColor = d3.scaleSequential().domain([0, 1]).interpolator(d3.interpolateWarm)
   //var myColor = d3.scaleLinear().range(["red", "#69b3a2"]).domain([-1,1])
    // var myColor = d3.scaleLinear().range(['Blue', '#69b3a2']).domain([-1,1]);
