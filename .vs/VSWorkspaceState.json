@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DjangoWeb"
+    "\\DjangoWeb\\DjangoWeb",
+    "\\DjangoWeb\\UploadingFile"
   ],
+  "SelectedNode": "\\DjangoWeb",
   "PreviewInSolutionExplorer": false
 }

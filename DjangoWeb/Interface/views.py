@@ -33,6 +33,18 @@ def descriptiveStats(request):                         ## function to display ne
     numENT=mergedTables.objects.values('ENTREPRISE').distinct().count()
     STUyear=return_distinct_year(df)
     # STUQtdPerYear=return_distinct_STUQtdPerYear(df)
+
+    #extract
+    num_records=num_records1(df)
+    num_std=num_std1(df)
+    num_entre=num_entre1(df)
+    mean_sal=mean_sal1(df)
+
+    d_stddist,l_site = stddist(df, 'SITE')
+    c_cergy, c_pau, c_le =count_std(df,'PRG')
+    s_cergy, s_pau, s_le =salary_avg(df, 'PRG')
+
+
     dataGraph=[1000,10,552,2,63,830,10,84,400]
     heat_value=heatmap_ftr_slcor(df)
     context={'query_results':query_results,
@@ -43,60 +55,46 @@ def descriptiveStats(request):                         ## function to display ne
              'DATAGRAPH':dataGraph,
              'heat_value':heat_value,
                 }
+             'Mean_sal':mean_sal,
+             'num_records':num_records,
+             'num_std':num_std,
+             'num_entre':num_entre,
+             'D_stddist':d_stddist,
+             'L_stddist':list(l_site),
+             'L_count':list(c_le),
+             'D_cergyc':list(c_cergy),
+             'D_pauc':list(c_pau),
+             'L_sal': list(s_le),
+             'D_cergys': list(c_cergy),
+             'D_paus': list(c_pau),
+             }
     return render(request, 'descriptiveStats2.html', context)
 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
 def etl(request):
-    df_list_versions=return_distinct_version(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    max_version=max(df_list_versions)
-    PRG= PRG_STUDENT_SITE.pdobjects.all().to_dataframe()
-    ADR= ADR_STUDENTS.pdobjects.all().to_dataframe()
-    STU= STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
+    df_new=showMissingValues( PRG_STUDENT_SITE.pdobjects.all().to_dataframe() )
 
-    version_filtered= request.GET.get('version')
+    df1_new=showMissingValues( ADR_STUDENTS.pdobjects.all().to_dataframe() )
 
-    if version_filtered:
-        PRG=PRG [PRG['idCSV']==version_filtered ]
-        ADR=ADR [ADR['idCSV']==version_filtered ]
-        STU=STU [STU['idCSV']==version_filtered ]
-    else :
-        PRG=PRG [PRG['idCSV']==max_version ]
-        ADR=ADR [ADR['idCSV']==max_version ]
-        STU=STU [STU['idCSV']==max_version ]
+    df2_new=showMissingValues( STUDENT_INTERNSHIP.pdobjects.all().to_dataframe() )
 
-    PRGMissing=showMissingValues( PRG )
-    ADRMissing=showMissingValues( ADR )
-    STUMissing=showMissingValues( STU )
-
-    context={'LIST_VERSIONS': df_list_versions,
-             'MAX_VERSION':max_version,
-             'PRG_STUDENT_SITE':PRGMissing.to_dict('split'),
-             'ADR_STUDENTS':ADRMissing.to_dict('split'),
-             'STUDENT_INTERNSHIP':STUMissing.to_dict('split')
+    context={'PRG_STUDENT_SITE':df_new.to_dict('split'),
+             'ADR_STUDENTS':df1_new.to_dict('split'),
+             'STUDENT_INTERNSHIP':df2_new.to_dict('split')
             }
     
     return render(request, 'etl.html', context)
 
 @login_required
-def etl_mergetables(request):    
-    version=int(mergedTables.objects.all().aggregate(Max('idCSV'))['idCSV__max']) + 1
-    description='Delete Null Values'
-    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
-    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
-       
-    df=mergeTables(ADR,PRG,STU)
-    df=deleteMissingValues(df)
-    numberlines = df.ID_ANO.count()
-    table = mergedTables.objects
-    #writeDF2Table(df, table, version, description )
-
-    df=showMissingValues( mergedTables.pdobjects.filter(idCSV=version).to_dataframe() )
-    context={'MERGEDTABLES' :df.to_dict('split') ,
-             'NUMBERLINES'  :numberlines ,
-             'VERSION'      :str(version) + " - " + description
+def etl_mergetables(request):
+    context=mergeTables(
+        ADR_STUDENTS.pdobjects.all().to_dataframe() ,
+        PRG_STUDENT_SITE.pdobjects.all().to_dataframe() ,
+        STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
+    )
+    df=showMissingValues( mergedTables.pdobjects.all().to_dataframe() )
+    context={'MERGEDTABLES':df.to_dict('split')
             }
     return render(request, 'etl_mergedtables.html', context)
 
@@ -156,7 +154,7 @@ def contact_us(request):                                        # contact us for
                 headers = {'Reply-To': contact_email }
             )
             email.send()
-            return redirect('home')
+            return redirect('contact_us')
 
     return render(request, 'contact_us.html', {
         'form': form_class,
