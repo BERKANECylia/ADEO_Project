@@ -20,6 +20,8 @@ from .forms import DocumentForm
 import csv
 import codecs
 import ast
+import re
+
 def uploadCSV(request):
      #tables=models._meta.db_table
      #tables=connection.introspection.table_names()
@@ -100,8 +102,8 @@ def model_form_upload(request):
         if form.is_valid():
             ptable=form.cleaned_data.get('selectedtable')
             uploadedFile=request.FILES['document']
-            fileType=form.cleaned_data.get('fileFormat')
-
+            fileType=form.cleaned_data.get('fileFormat').lower()
+            separator=form.cleaned_data['separator']
             #Process the file
             if uploadedFile.multiple_chunks():
                 messages.error(request,"Uploaded file is too big (%.2f MB)." % (myfile.size/(1000*1000),))
@@ -110,7 +112,7 @@ def model_form_upload(request):
                 if fileType=='csv':
                     handle_csv_file(uploadedFile,ptable)
                 if fileType=='txt':
-                    handle_uploaded_file(uploadedFile,ptable)
+                    handle_uploaded_file(uploadedFile,ptable,separator)
             else:
                 messages.error(request,'File is not CSV & text type')
                 return HttpResponseRedirect(reverse('model_form_upload'))
@@ -121,22 +123,35 @@ def model_form_upload(request):
         form = DocumentForm()
     return render(request, 'model_form_upload.html',{'form': form})
 
-def handle_uploaded_file(f,table):
+def handle_uploaded_file(f,table,separator):
     
     file_data = f.read().decode("utf-8")		
     lines = file_data.split("\n")
     #loop over the lines and save them in db. If error , store as string and then display
-    for line in lines:
-        if line.strip():
-        #   line = line.strip().strip('\n')
-            line.strip('\n')
-            fields = line.split(",")
-            prg_student_site=eval(table)(ID_ANO=fields[1],PRG=fields[2],ANNE_SCOLAIRE=fields[3],SITE=fields[4])
-            try:
-                prg_student_site.save()
-            except Exception as e:
-                messages.error(request,"Unable to upload file. "+repr(e))   
-
+    if separator=='comma':
+        for line in lines:
+            if line.strip():
+            #   line = line.strip().strip('\n')
+                line.strip('\n')
+                fields = line.split(",")
+                prg_student_site=PRG_STUDENT_SITE(ID_ANO=fields[0],PRG=fields[1],ANNE_SCOLAIRE=fields[2],SITE=fields[3])
+                try:
+                    prg_student_site.save()
+                except Exception as e:
+                    messages.error(request,"Unable to upload file. "+repr(e))   
+    if separator=='tab':
+        for line in lines:
+            if line.strip():
+            #   line = line.strip().strip('\n')
+                line.strip('\n')
+                fields=line.split('\t')
+                #fields =re.split(r'\t+', line.rstrip('\t')) 
+                #prg_student_site=eval(table)(ID_ANO=fields[0],PRG=fields[1],ANNE_SCOLAIRE=fields[2],SITE=fields[3])
+                prg_student_site=PRG_STUDENT_SITE(ID_ANO=fields[0],PRG=fields[1],ANNE_SCOLAIRE=fields[2],SITE=fields[3])
+                try:
+                    prg_student_site.save()
+                except Exception as e:
+                    messages.error(request,"Unable to upload file. "+repr(e))  
 def handle_csv_file(f,tablePicked):
     reader = csv.DictReader(codecs.iterdecode(f, 'latin-1'))
     #reader = csv.DictReader(codecs.iterdecode(f, 'utf-8'))

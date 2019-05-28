@@ -10,11 +10,11 @@ tables=[('PRG_STUDENT_SITE','PRG_STUDENT_SITE'),
        ]
 
 filetypes=[('csv','csv'),
-           ('text','txt'),
+           ('txt','txt'),
           ]
 
 separators=[('comma','comma'),
-            ('space','space'),
+            ('tab','tab'),
            ]
 
 class DocumentForm(forms.ModelForm):
