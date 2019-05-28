@@ -7,9 +7,6 @@
 $.ajax({
     success: function(data) {
         setchart()
-        piechart()
-        setchart2()
-        piechart2()
     },
     error: function(error_data){
         console.log("error")
@@ -46,17 +43,17 @@ function setchart() {
     var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels:[ 
+                labels:[
                 {% for year in STUyear %}
                   {{ year }},
-                {% endfor %}                  
+                {% endfor %}
                   ] ,
                 datasets: [{
                     label: '# of students',
                     data: {{ DATAGRAPH }},
-            backgroundColor: prgcolorset ,
-            borderColor: prgcolorborderset,
-            borderWidth: 1
+            backgroundColor: '#9ccc65' ,
+            borderColor: '#33691e',
+            borderWidth: 3
         }]
     },
     options: {
@@ -89,13 +86,13 @@ function piechart() {
     var pieChart = new Chart(ctx, {
     type: 'doughnut',
     data:{
-                labels: [1,2],
-                datasets: [{
+        labels: ['Cergy','Pau'],
+        datasets: [{
                     label: '% of students',
-                    data: [50,80],
-            backgroundColor: prgcolorset,
-            borderColor: prgcolorborderset,
-            borderWidth: 1,
+                    data: {{ D_stddist }},
+            backgroundColor: ['#ffee58','#ffa726'],
+            borderColor: '#33691e',
+            borderWidth: 3,
         }]
     },
     options: {
@@ -107,6 +104,13 @@ function piechart() {
             display:true,
             position:'bottom',
         },
+    },
+    plugins:{
+        labels: {
+            render: 'percentage',
+            fontColor: ['green', 'white'],
+            precision: 2
+            }
     }
 });
 }
@@ -115,38 +119,48 @@ function setchart2() {
     ctx.shadowBlur=20;
     ctx.shadowColor="black";
     var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels:[1,2,2,2,3,3,3,4,4] ,
-                datasets: [{
-                    label: '# of students',
-                    data: [13,42,552,2,63,83,3,84,4],
-            backgroundColor: prgcolorset ,
-            borderColor: prgcolorborderset,
-            borderWidth: 1
-        }]
+    type: 'bar',
+    data: {
+      labels: ['ADEO1', 'ADEO2' ,'CPI1' ,'CPI2', 'ING1' ,'ING2' ,'ING3' ,'MobM2' ,'QFRM1' ,'QFRM2'], <!--put the prg-->
+      datasets: [{
+          label: "Cergy(Amount of students)",
+          type: "line",
+          borderColor: '#26c6da',
+          data: {{ D_cergyc }},
+          fill: false
+        },
+          {
+          label: "Pau(Amount of students)",
+          type: "line",
+          borderColor: '#5c6bc0',
+          data: {{ D_pauc }},
+          fill: false
+        },
+          {
+          label: "Cergy(Mean salary)",
+          type: "bar",
+          backgroundColor: '#ffe082',
+          data: {{ D_cergys }},
+        }, {
+          label: "Pau(Mean salary)",
+          type: "bar",
+          backgroundColor: '#bf360c',
+          backgroundColorHover: '#ffab91',
+          data:{{ D_paus }},
+        }
+
+      ]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-
-        title: {
-            display: false,
-            text: 'Department versus Salary'
-        },
-
-        legend: {
-            display: true,
-            position:'bottom',
-        },
-        tooltips: {
-            mode: 'x'
-        }
+      title: {
+        display: false,
+        text: 'Population growth (millions): Europe & Africa'
+      },
+      legend: { display: true ,
+                position:'bottom'},
+      plugins: {
+          labels: false
+      }
     }
 });
 
@@ -266,6 +280,8 @@ svg.append("text")
         .style("fill", "grey")
         .style("max-width", 400)
         .text("A short description of the take-away message of this chart.");
+{% endblock %}
+</script>
 
 
 
@@ -277,7 +293,7 @@ svg.append("text")
 {% block content %}
 
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Dashboard</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
@@ -356,7 +372,6 @@ svg.append("text")
                 <div class="row">
                   <div class="col-5 col-md-4">
 
-                      <img  src="\static\images\enterprise.png" height="40">
 
                   </div>
                   <div class="col-7 col-md-8">
@@ -445,22 +460,20 @@ svg.append("text")
     </div>
 </div>
 
-<!--
     <h2>Program Data</h2>
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
-
               <!-- <th>#</th> -->
-<!--            <th>ID_ANO</th>
+              <th>ID_ANO</th>
               <th>PRG</th>
               <th>PAYS</th>
               <th>SITE</th>
           </tr>
         </thead>
         <tbody>
-          
+
             {% for item in query_results %}
             <tr>
                 <td>{{ item.ID_ANO }}</td>
@@ -483,4 +496,5 @@ svg.append("text")
   <scripst src="htdtps://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <scripst src="https://d3js.org/d3.v4.js"></script> 
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
 {% endblock %}

@@ -1,4 +1,0 @@
-With more data about the students:
-- Could verify who will dropout (and try to prevent);
-- Try to associate Student Perfil with the List Best Internship;
-- 
