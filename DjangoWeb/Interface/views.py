@@ -53,23 +53,23 @@ def etl(request):
     ADR= ADR_STUDENTS.pdobjects.all().to_dataframe()
     STU= STUDENT_INTERNSHIP.pdobjects.all().to_dataframe()
 
-    version_filtered= request.GET.get('version')
+    version_filtered =  (request.GET.get('version'))
 
     if version_filtered:
-        PRG=PRG [PRG['idCSV']==version_filtered ]
-        ADR=ADR [ADR['idCSV']==version_filtered ]
-        STU=STU [STU['idCSV']==version_filtered ]
-    else :
-        PRG=PRG [PRG['idCSV']==max_version ]
-        ADR=ADR [ADR['idCSV']==max_version ]
-        STU=STU [STU['idCSV']==max_version ]
+       version_filtered =  (int) (version_filtered)
+    else:
+        version_filtered=max_version
+
+    PRG=PRG [PRG['idCSV']==version_filtered ]
+    ADR=ADR [ADR['idCSV']==version_filtered ]
+    STU=STU [STU['idCSV']==version_filtered ]
 
     PRGMissing=showMissingValues( PRG )
     ADRMissing=showMissingValues( ADR )
     STUMissing=showMissingValues( STU )
 
     context={'LIST_VERSIONS': df_list_versions,
-             'MAX_VERSION':max_version,
+             'SELECTED_VERSION':version_filtered,
              'PRG_STUDENT_SITE':PRGMissing.to_dict('split'),
              'ADR_STUDENTS':ADRMissing.to_dict('split'),
              'STUDENT_INTERNSHIP':STUMissing.to_dict('split')
@@ -81,10 +81,13 @@ def etl(request):
 def etl_mergetables(request):    
     version=int(mergedTables.objects.all().aggregate(Max('idCSV'))['idCSV__max']) + 1
     description='Delete Null Values'
-    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
-    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
-       
+
+    version_filtered =  (request.GET.get('version'))
+
+    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.filter(idCSV=version_filtered).to_dataframe())    
+    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.filter(idCSV=version_filtered).to_dataframe())
+    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.filter(idCSV=version_filtered).to_dataframe())
+    
     df=mergeTables(ADR,PRG,STU)
     df=deleteMissingValues(df)
     numberlines = df.ID_ANO.count()
@@ -102,9 +105,12 @@ def etl_mergetables(request):
 def etl_mergetablesRF(request):    
     version=int(mergedTables.objects.all().aggregate(Max('idCSV'))['idCSV__max']) + 1
     description='Fill with RandomForest Algorithm'
-    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.all().to_dataframe())    
-    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.all().to_dataframe())
-    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.all().to_dataframe())
+    
+    version_filtered =  (request.GET.get('version'))
+
+    ADR=redefineDFTypes(ADR_STUDENTS.pdobjects.filter(idCSV=version_filtered).to_dataframe())    
+    PRG=redefineDFTypes(PRG_STUDENT_SITE.pdobjects.filter(idCSV=version_filtered).to_dataframe())
+    STU=redefineDFTypes(STUDENT_INTERNSHIP.pdobjects.filter(idCSV=version_filtered).to_dataframe())
     LOC=redefineDFTypes(ADR_LOCATION.pdobjects.all().to_dataframe())
        
     ADR1,PRG1,STU1=UpdateMissingValues(ADR,PRG,STU,LOC )
@@ -112,7 +118,7 @@ def etl_mergetablesRF(request):
     print(df)
     numberlines = df.ID_ANO.count()
     table = mergedTables.objects
-    #writeDF2Table(df, table, version, description )
+    writeDF2Table(df, table, version, description )
 
     df=showMissingValues( mergedTables.pdobjects.filter(idCSV=version).to_dataframe() )
     context={'MERGEDTABLES' :df.to_dict('split') ,
