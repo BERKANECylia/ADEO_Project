@@ -196,7 +196,6 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
-<<<<<<< HEAD
 
 
 
@@ -273,7 +272,9 @@ def stddist(df,cat):
 def count_std(df,cat):
     ct=df.groupby(['SITE','PRG']).count()
     ind=ct.index
-    ind = np.array(ind.codes)
+    ind = np.array(ind.labels)
+    print(ind)
+
 
     le = preprocessing.LabelEncoder()
     le.fit(df[cat][df[cat].notnull()])
@@ -306,7 +307,7 @@ def salary_avg(df,cat):
     df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'],errors='coerce')
     mean=df.groupby(['SITE','PRG']).mean()
     ind=mean.index
-    ind = np.array(ind.codes)
+    ind = np.array(ind.labels)
 
 
 
@@ -329,5 +330,3 @@ def salary_avg(df,cat):
         count=count+1
 
     return(cergy,pau,le)
-=======
->>>>>>> parent of f679eee... correlation Heatmap

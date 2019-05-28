@@ -30,6 +30,7 @@ def descriptiveStats(request):
     STUyear=return_distinct_year(df)
     # STUQtdPerYear=return_distinct_STUQtdPerYear(df)
 
+
     #extract
     num_records=num_records1(df)
     num_std=num_std1(df)
@@ -42,6 +43,7 @@ def descriptiveStats(request):
 
 
     dataGraph=[1000,10,552,2,63,830,10,84,400]
+    heat_value=heatmap_ftr_slcor(df)
     context={'query_results':query_results,
              'NUMBERLINES':qs,
              'NUMBERSTU':numSTU,
