@@ -196,3 +196,138 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
+<<<<<<< HEAD
+
+
+
+
+def heatmap_ftr_slcor(df):                    # heatlap feature selector funciton
+    le={}
+    le_df=df.drop(columns='ANNEE')
+    le_df['ADR_CP']=le_df['ADR_CP'].astype(object)
+    for col in le_df.columns:                                                   ### cai's code
+        if le_df.dtypes[col]=='object':
+            le_df[col]=le_df[col].str.upper()
+            le[col]=LabelEncoder()
+            result=le[col].fit_transform(le_df[le_df[col].notnull()][col])
+            le_df.loc[le_df[le_df[col].notnull()].index,col]=result
+    
+    fs = FeatureSelector(data = le_df, labels = df['REMUNERATION'])
+    cor_out=le_df.corr()
+    cor_out.drop(columns='idCSV',inplace=True)
+    cor_out.drop(columns='ID_ANO',inplace=True)                               ## here i dropping unwanted columns
+    cor_out.drop(columns='id',inplace=True)
+    print(cor_out.columns)
+    new_df= pd.DataFrame(columns=['group','variable','value'])                  # new dataframe
+    new_df.columns
+    k=0
+    li=list(cor_out.columns)
+    print(li)
+    length=len(li)
+    #cor_out.reset_index(inplace=True, drop=True)
+    i_ind=0
+    k=0
+    
+    while i_ind<length:                                                 ## to group all the variables according as shown in the "indu.csv", so as to be fead to heatmap
+        #print(li[i_ind])
+
+        for i in li:
+            new_df.loc[k,'group']=li[i_ind]
+            new_df.loc[k,'variable']=i
+            new_df.loc[k,'value']=cor_out.loc[i,li[i_ind]]*10          ##### since all the values are very very less, there aren't showing significant difference in heatmap
+            k=k+1                                                      ##### so just multiplied by 10 .... THIS HAS TO BE CHECKED
+        i_ind=i_ind+1
+    print(new_df.head(3))
+    new_df.to_csv('H:\Documents\git\ADEO_Project\DjangoWeb\Interface\static\indu.csv',index=False)
+    return  None
+#num of records
+def num_records1(df):
+    return(len(df.index))
+
+#num of students
+def num_std1(df):
+    return(len(df['ID_ANO'].unique()))
+#num of enterprise
+def num_entre1(df):
+    return (len(df['ENTREPRISE'].unique()))
+#mean of salary
+def mean_sal1(df):
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'], errors='coerce')
+    meansal = df['REMUNERATION'].mean()
+    meansal = "{:5.2f}".format(meansal)
+    return(meansal)
+
+
+
+def stddist(df,cat):
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    le = np.array(le.classes_)
+    col=[]
+    for i in le:
+        df2=df[df['SITE']==i]
+        col.append(len(df2['ID_ANO'].unique()))
+    return(col,le)
+
+#std_number
+def count_std(df,cat):
+    ct=df.groupby(['SITE','PRG']).count()
+    ind=ct.index
+    ind = np.array(ind.codes)
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng=len(le.classes_)
+    le = np.array(le.classes_)
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                cergy[ind[1][count]]=ct['ID_ANO'][count]
+
+        else:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                pau[ind[1][count]]=ct['ID_ANO'][count]
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+    return(cergy,pau,le)
+
+def salary_avg(df,cat):
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng = len(le.classes_)
+    le = np.array(le.classes_)
+
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'],errors='coerce')
+    mean=df.groupby(['SITE','PRG']).mean()
+    ind=mean.index
+    ind = np.array(ind.codes)
+
+
+
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                cergy[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+
+
+        else:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                pau[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+
+    return(cergy,pau,le)
+=======
+>>>>>>> parent of f679eee... correlation Heatmap

@@ -1,9 +1,10 @@
 # http://www.jeffreyteruel.com/article/42
  #student forms.py
 from django import forms
-#from .models import Student
-#from house.models import House
-from django.forms import ModelChoiceField
+#from .models import House
+##from .models import Student
+##from house.models import House
+#from django.forms import ModelChoiceField
 
 #class StudentForm(forms.ModelForm):
 #    name = forms.CharField(widget=forms.TextInput())

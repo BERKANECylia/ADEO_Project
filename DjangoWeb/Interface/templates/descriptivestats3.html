@@ -162,6 +162,8 @@ function setchart2() {
 </script>
 
 
+{% block content %}
+
 
 
 
@@ -298,6 +300,45 @@ function setchart2() {
 
 </div>
 <div class="row">
+            <div class="col-lg-4  text-center" >
+                <div class="card-chart ">
+                  <div class="card-header ">
+                    <h5 class="card-title">Students Distribution</h5>
+                    <p class="card-category">In Campus</p>
+                  </div>
+                  <div class="inside-left">
+                    <canvas class="my-4 w-10" id="piechart" width="100%" height="70"></canvas>
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8 " >
+                
+              <div class="card-chart flex-column">
+                      <div class="card-header ">
+                        <h5 class="card-title">Salary and amount of students </h5>
+                        <p class="card-category">per departments</p>
+                        <div class="inside">
+                            <canvas class="my-4 w-10" id="myChart2" width="100%" height="30"  ></canvas>
+                        </div>
+                      </div>
+              </div>
+                
+              <div class="card-chart flex-column">
+                      <div class="card-header ">
+                        <h5 class="card-title">Students per year</h5>
+                          <p class="card-category">From 2014 til last year</p>
+                          <div class="inside">
+                            <canvas class="my-4 w-10" id="myChart" width="100%" height="25" ></canvas>
+                          </div>
+                      </div>
+              </div>
+
+            </div>
+</div>
+
+ <!--
     <div class="col-lg-4  text-center" >
             <div class="card-chart ">
               <div class="card-header ">
@@ -339,6 +380,7 @@ function setchart2() {
       <table class="table table-striped table-sm">
         <thead>
           <tr>
+              <th>ID_ANO</th>
 
               <!-- <th>#</th> -->
 <!--            <th>ID_ANO</th>
