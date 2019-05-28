@@ -54,7 +54,6 @@ def descriptiveStats(request):                         ## function to display ne
              'STUyear':STUyear, 
              'DATAGRAPH':dataGraph,
              'heat_value':heat_value,
-                }
              'Mean_sal':mean_sal,
              'num_records':num_records,
              'num_std':num_std,
