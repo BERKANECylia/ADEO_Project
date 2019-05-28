@@ -35,6 +35,20 @@ def descriptiveStats(request):                         ## function to display ne
     # STUQtdPerYear=return_distinct_STUQtdPerYear(df)
     dataGraph=[1000,10,552,2,63,830,10,84,400]
     heat_value=heatmap_ftr_slcor(df)
+
+    num_records=num_records1(df)
+    num_std=num_std1(df)
+    num_entre=num_entre1(df)
+    mean_sal=mean_sal1(df)
+
+    d_stddist,l_site = stddist(df, 'SITE')
+    c_cergy, c_pau, c_le =count_std(df,'PRG')
+    s_cergy, s_pau, s_le =salary_avg(df, 'PRG')
+
+
+
+
+
     context={'query_results':query_results,
              'NUMBERLINES':qs,
              'NUMBERSTU':numSTU,
@@ -42,6 +56,18 @@ def descriptiveStats(request):                         ## function to display ne
              'STUyear':STUyear, 
              'DATAGRAPH':dataGraph,
              'heat_value':heat_value,
+             'Mean_sal':mean_sal,
+             'num_records':num_records,
+             'num_std':num_std,
+             'num_entre':num_entre,
+             'D_stddist':d_stddist,
+             'L_stddist':list(l_site),
+             'L_count':list(c_le),
+             'D_cergyc':list(c_cergy),
+             'D_pauc':list(c_pau),
+             'L_sal': list(s_le),
+             'D_cergys': list(c_cergy),
+             'D_paus': list(c_pau),
                 }
     return render(request, 'descriptiveStats2.html', context)
 

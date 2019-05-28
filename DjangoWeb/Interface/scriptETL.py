@@ -240,3 +240,105 @@ def heatmap_ftr_slcor(df):                    # heatlap feature selector funcito
     print(new_df.head(3))
     new_df.to_csv('H:\Documents\git\ADEO_Project\DjangoWeb\Interface\static\indu.csv',index=False)
     return  None
+
+
+
+def change(num):
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    # add more suffixes if you need them
+    return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
+
+
+#num of records
+def num_records1(df):
+    amount = len(df.index)
+    return(change(amount))
+
+#num of students
+def num_std1(df):
+    amount=len(df['ID_ANO'].unique())
+    return(change(amount))
+#num of enterprise
+def num_entre1(df):
+    amount=len(df['ENTREPRISE'].unique())
+    return (change(amount))
+#mean of salary
+def mean_sal1(df):
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'], errors='coerce')
+    meansal = df['REMUNERATION'].mean()
+    meansal = "€ {:,.2f}".format(meansal)
+    return(meansal)
+
+def stddist(df,cat):
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    le = np.array(le.classes_)
+    col=[]
+    for i in le:
+        df2=df[df['SITE']==i]
+        col.append(len(df2['ID_ANO'].unique()))
+    return(col,le)
+
+#std_number
+def count_std(df,cat):
+    ct=df.groupby(['SITE','PRG']).count()
+    ind=ct.index
+    ind = np.array(ind.codes)
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng=len(le.classes_)
+    le = np.array(le.classes_)
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                cergy[ind[1][count]]=ct['ID_ANO'][count]
+
+        else:
+            if np.isnan(ct['ID_ANO'][count])==False:
+                pau[ind[1][count]]=ct['ID_ANO'][count]
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+    return(cergy,pau,le)
+
+def salary_avg(df,cat):
+
+    le = preprocessing.LabelEncoder()
+    le.fit(df[cat][df[cat].notnull()])
+    leng = len(le.classes_)
+    le = np.array(le.classes_)
+
+    df['REMUNERATION'] = pd.to_numeric(df['REMUNERATION'],errors='coerce')
+    mean=df.groupby(['SITE','PRG']).mean()
+    ind=mean.index
+    ind = np.array(ind.codes)
+
+
+
+
+    cergy=np.zeros(leng)
+    pau=np.zeros(leng)
+    count=0
+
+    for i in ind[0]:
+        if i == 0:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                cergy[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+
+
+        else:
+            if np.isnan(mean['REMUNERATION'][count])==False:
+                pau[ind[1][count]]="{:5.2f}".format(mean['REMUNERATION'][count])
+            else:
+                cergy[ind[1][count]]=0
+        count=count+1
+
+    return(cergy,pau,le)
