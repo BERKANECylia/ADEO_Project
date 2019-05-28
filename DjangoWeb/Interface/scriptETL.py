@@ -4,7 +4,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 from math import radians, cos, sin, asin, sqrt
-from feature_selector import FeatureSelector
 
 def showMissingValues(df):
     df[df == ""] = np.nan
@@ -197,6 +196,7 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
+<<<<<<< HEAD
 
 
 
@@ -329,3 +329,5 @@ def salary_avg(df,cat):
         count=count+1
 
     return(cergy,pau,le)
+=======
+>>>>>>> parent of f679eee... correlation Heatmap
