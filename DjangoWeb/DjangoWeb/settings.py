@@ -124,6 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
+
 # Store CSV file 
 MEDIA_ROOT=os.path.join(BASE_DIR, 'CSVFile')
 MEDIA_URL='/CSV/'

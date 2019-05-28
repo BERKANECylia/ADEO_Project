@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 from math import radians, cos, sin, asin, sqrt
+from feature_selector import FeatureSelector
 
 def showMissingValues(df):
     df[df == ""] = np.nan
@@ -196,3 +197,46 @@ def UpdateMissingValues(ADR,PRG,STU,df_location):
                     break
  
     return ADR,PRG,STU
+
+
+
+
+def heatmap_ftr_slcor(df):                    # heatlap feature selector funciton
+    le={}
+    le_df=df.drop(columns='ANNEE')
+    le_df['ADR_CP']=le_df['ADR_CP'].astype(object)
+    for col in le_df.columns:                                                   ### cai's code
+        if le_df.dtypes[col]=='object':
+            le_df[col]=le_df[col].str.upper()
+            le[col]=LabelEncoder()
+            result=le[col].fit_transform(le_df[le_df[col].notnull()][col])
+            le_df.loc[le_df[le_df[col].notnull()].index,col]=result
+    
+    fs = FeatureSelector(data = le_df, labels = df['REMUNERATION'])
+    cor_out=le_df.corr()
+    cor_out.drop(columns='idCSV',inplace=True)
+    cor_out.drop(columns='ID_ANO',inplace=True)                               ## here i dropping unwanted columns
+    cor_out.drop(columns='id',inplace=True)
+    print(cor_out.columns)
+    new_df= pd.DataFrame(columns=['group','variable','value'])                  # new dataframe
+    new_df.columns
+    k=0
+    li=list(cor_out.columns)
+    print(li)
+    length=len(li)
+    #cor_out.reset_index(inplace=True, drop=True)
+    i_ind=0
+    k=0
+    
+    while i_ind<length:                                                 ## to group all the variables according as shown in the "indu.csv", so as to be fead to heatmap
+        #print(li[i_ind])
+
+        for i in li:
+            new_df.loc[k,'group']=li[i_ind]
+            new_df.loc[k,'variable']=i
+            new_df.loc[k,'value']=cor_out.loc[i,li[i_ind]]*10          ##### since all the values are very very less, there aren't showing significant difference in heatmap
+            k=k+1                                                      ##### so just multiplied by 10 .... THIS HAS TO BE CHECKED
+        i_ind=i_ind+1
+    print(new_df.head(3))
+    new_df.to_csv('H:\Documents\git\ADEO_Project\DjangoWeb\Interface\static\indu.csv',index=False)
+    return  None
